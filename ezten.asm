@@ -4,6 +4,9 @@
 	
 	p: .word 0
 	g: .word 0
+	normalTxt: .space 50
+	criptTxt: .space 50
+	vectorCriptare: .space 256 
 	
 	newl: .asciiz "\n"
 	space: .asciiz " "
@@ -17,14 +20,62 @@ main:
 	jal readInt		# aple functie citire int
 	lw $t0, readBuf		# il trag din memorie (unde a fost urcat in functia de citire)
 	sw $t0, p		# salvez in p (.data)
-	sw $t0, argBuf		# de asemenea urc in argument Buffer pentru ulteriorul apel al functiei is prime
+	sw $t0, argBuf		# de asemenea urc in argument Buffer pentru ulteriorul apel al functiei isPrime
 	jal isPrime		# exit if not prime / continue if it is
 	jal smallestGenerator	# saves the smallest generator to g (.data)
-	lw $t0, g
-	sw $t0, argBuf
-	jal printInt
+	jal genVectorCriptat
+	jal readNormalText	# read normalTxt
+	#jal readCriptedText	# read criptTxt
+	jal playGround
 	
 	j stopProgram 		# end_main ^_^
+
+playGround:
+	la $a0, normalTxt
+	lw $t1, 0($a0)
+	move $t1, $a0
+	li $v0, 11
+	syscall
+	jr $ra
+
+readCriptedText:
+	li $v0, 8
+    	la $a0, criptTxt 
+    	li $a1, 50   
+    	syscall
+    	jr $ra
+
+readNormalText:
+	li $v0, 8       # take in input
+    	la $a0, normalTxt  # a0 = string u want to store in
+    	li $a1, 50      # a1 = size
+    	syscall
+    	jr $ra
+	
+genVectorCriptat:
+	lw $s0, p		# s0 = p
+	lw $s1, g		# s1 = g
+	move $t0, $s1		# last = g
+	li $t1, 0		# contor i
+	
+	# pun prima data pe 1 la inceput
+	li $t2, 1
+	sw $t2, vectorCriptare($t1)
+	addi $t1, $t1, 4	
+	
+	genWhile:
+		beq $t0, 1, doneGenerating	
+		
+		sw $t0, vectorCriptare($t1)	# vectorCriptare(i) = last
+		addi $t1, $t1, 4		# i ++
+		multu $t0, $s1			# last * g
+		mflo $t0			# last = last * g
+		div $t0, $s0			# last / p
+		mfhi $t0			# last = last % p
+		
+		j genWhile
+	doneGenerating:
+	jr $ra
 	
 smallestGenerator:
 	lw $t4, p 		# t0 = p
