@@ -6,7 +6,7 @@
 	g: .word 0
 	normalTxt: .space 50
 	criptTxt: .space 50
-	vectorCriptare: .space 256 
+	vectorCriptare: .space 256
 	
 	newl: .asciiz "\n"
 	space: .asciiz " "
@@ -31,11 +31,21 @@ main:
 	j stopProgram 		# end_main ^_^
 
 playGround:
-	la $a0, normalTxt
-	lw $t1, 0($a0)
-	move $t1, $a0
-	li $v0, 11
-	syscall
+	la $s0, normalTxt	# trage textul in s0	
+	playWhile:
+		lb $a0, 0($s0)		# incarca in a0 byte cu index s
+		beqz $a0, playEnding
+		li $v0, 11
+   		syscall
+   		
+   		li $v0, 4
+   		la $a0, space
+   		syscall  		
+   		
+   		addi $s0, $s0, 1	# increment adress
+   		j playWhile
+   	
+	playEnding:
 	jr $ra
 
 readCriptedText:
