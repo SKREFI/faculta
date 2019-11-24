@@ -28,35 +28,49 @@ main:
 	jal smallestGenerator	# saves the smallest generator to g (.data)
 	jal genVectorCriptat 	# saves the vector in vectorCriptare
 	jal readNormalText	# read normalTxt
-	jal readCriptedText	# read criptTxt
+	#jal readCriptedText	# read criptTxt
 	jal cript		# cripteaza textul normal
 	jal genVectorDecriptat  # salvat in vectorDecriptare
-	jal decript		# decripteaza textul citit
+	#jal decript		# decripteaza textul citit
 	
 	j stopProgram 		# end_main ^_^
 
 decript:
+	la $s0, criptTxt
+	li $t1, 0
+	li $t2, 0
+	lw $s1, p
+	deWhile:
+		bgt $t1, $s1, decriptingDone
 		
+		li $v0, 1
+		lw $a0, vectorDecriptare($t2)
+		syscall
+		
+		addi $t1, $t1, 1
+		addi $t2, $t2, 4
+		j deWhile
+	decriptingDone:
 	jr $ra
 	
 genVectorDecriptat:
 	li $t1, 0				# merge din 4 in 4
 	li $t2, 0				# merge din 1 in 1
-	decriptWhile:
+	decriptVectorWhile:
 		lw $a0, vectorCriptare($t1)	# a0 = vc[t1]
-		beqz $a0, decriptWhileDone 	# a iesit cand a intalnit 0 (care se afla la final mereu)
+		beqz $a0, decriptVectorWhileDone# a iesit cand a intalnit 0 (care se afla la final mereu)
 		
 		li $t4, 4			### a0 *= 4
 		mult $a0, $t4			#
 		mflo $a0			#
 		addi $a0, $a0, -4 		# pentru a stora 0 2 1 4 5 3 in loc de 0 0 2 1 5 4 3
 							
-		sw $t2, vectorDecriptare($a0)	
-		
+		sw $t2, vectorDecriptare($a0)
+				
 		addi $t2, $t2, 1		
 		addi $t1, $t1, 4		
-		j decriptWhile
-	decriptWhileDone:
+		j decriptVectorWhile
+	decriptVectorWhileDone:
 	
 	lw $s0, p
 	addi $s0, $s0, -1	# shift la stanga, trebuie sa fac asta, ref: linia 52
@@ -74,9 +88,9 @@ genVectorDecriptat:
 	jr $ra
 
 cript:
-	la $s0, normalTxt			# trage textul in s0	
+	la $s0, normalTxt
 	criptWhile:
-		lb $s1, 0($s0)			# incarca in a0 byte cu index s0
+		lb $s1, 0($s0)			# incarca in s1 byte cu index s0
 		lb $t4, N			# incarca in t4 caracterul \n
 		beq $s1, $t4, encryptEnd	# inchide cand s1 = \n
 		li $t1, 0			
