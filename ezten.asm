@@ -2,11 +2,14 @@
 	readBuf: .word 0
 	argBuf: .word 0
 	
+	N: .byte '\n'
+	A: .byte 'A'
 	p: .word 0
 	g: .word 0
-	normalTxt: .space 50
-	criptTxt: .space 50
+	normalTxt: .space 64
+	criptTxt: .space 64
 	vectorCriptare: .space 256
+	vectorDecriptare: .space 256
 	
 	newl: .asciiz "\n"
 	space: .asciiz " "
@@ -23,29 +26,109 @@ main:
 	sw $t0, argBuf		# de asemenea urc in argument Buffer pentru ulteriorul apel al functiei isPrime
 	jal isPrime		# exit if not prime / continue if it is
 	jal smallestGenerator	# saves the smallest generator to g (.data)
-	jal genVectorCriptat
+	jal genVectorCriptat 	# saves the vector in vectorCriptare
 	jal readNormalText	# read normalTxt
-	#jal readCriptedText	# read criptTxt
-	jal playGround
+	jal readCriptedText	# read criptTxt
+	jal cript		# cripteaza textul normal
+	jal genVectorDecriptat  # salvat in vectorDecriptare
+	jal decript		# decripteaza textul citit
 	
 	j stopProgram 		# end_main ^_^
 
-playGround:
-	la $s0, normalTxt	# trage textul in s0	
-	playWhile:
-		lb $a0, 0($s0)		# incarca in a0 byte cu index s
-		beqz $a0, playEnding
-		li $v0, 11
-   		syscall
+decript:
+		
+	jr $ra
+	
+genVectorDecriptat:
+	li $t1, 0				# merge din 4 in 4
+	li $t2, 0				# merge din 1 in 1
+	decriptWhile:
+		lw $a0, vectorCriptare($t1)	# a0 = vc[t1]
+		beqz $a0, decriptWhileDone 	# a iesit cand a intalnit 0 (care se afla la final mereu)
+		
+		li $t4, 4			### a0 *= 4
+		mult $a0, $t4			#
+		mflo $a0			#
+		addi $a0, $a0, -4 		# pentru a stora 0 2 1 4 5 3 in loc de 0 0 2 1 5 4 3
+							
+		sw $t2, vectorDecriptare($a0)	
+		
+		addi $t2, $t2, 1		
+		addi $t1, $t1, 4		
+		j decriptWhile
+	decriptWhileDone:
+	
+	lw $s0, p
+	addi $s0, $s0, -1	# shift la stanga, trebuie sa fac asta, ref: linia 52
+	li $t4, 4		### p *= 4
+	mult $s0, $t4		#
+	mflo $s0		#
+	li $t1, 0		# contor i
+	test_:
+		lw $a0, vectorDecriptare($t1)
+		bge $t1, $s0, testDone
+		
+		addi $t1, $t1, 4
+		j test_
+	testDone:
+	jr $ra
+
+cript:
+	la $s0, normalTxt			# trage textul in s0	
+	criptWhile:
+		lb $s1, 0($s0)			# incarca in a0 byte cu index s0
+		lb $t4, N			# incarca in t4 caracterul \n
+		beq $s1, $t4, encryptEnd	# inchide cand s1 = \n
+		li $t1, 0			
+		lb $t4, A			# initializare cu A pentru numarare pana ajunge la X litera citita
+		
+		whileNotEqual:			# numara al cate-lea element este litera pe care se lucreaza
+			beq $t4, $s1, t1Found	# in caz de C t1 devine 4
+			addi $t1, $t1, 1	#
+			addi $t4, $t4, 1	#
+   			j whileNotEqual		#
+   		t1Found:
    		
-   		li $v0, 4
-   		la $a0, space
-   		syscall  		
+   		li $t4, 4			#
+   		mult $t1, $t4			#
+   		mflo $t1 			### t2 = vC[t1]
+   		lw $t2, vectorCriptare($t1)	#
+   		divu $t1, $t1, 4		#
    		
-   		addi $s0, $s0, 1	# increment adress
-   		j playWhile
-   	
-	playEnding:
+   		li $t3, 0			### explicit pentru fiecare
+   		blt $t1, $t2, imvi		#   caci aveam probleme si
+   		bgt $t1, $t2, iMvi		#   voiam sa fiu sigur ca aici
+   		beq $t1, $t2, ievi		#   nu sunt :)
+   		ievi:				# i == v[i]
+   			li $v0, 11
+   			move $a0, $s1
+   			syscall
+   			j doneMEM
+   		iMvi:				# i > v[i]  			
+   			subu $t3, $t1, $t2
+   			subu $s1, $s1, $t3
+   			
+  			li $v0, 11		### print char
+   			move $a0, $s1		#
+   			syscall			#
+   			j doneMEM		#
+   		imvi:				# i < v[i]
+   			subu $t3, $t2, $t1	# v[i] - i
+   			addu $s1, $s1, $t3	# a0 += v[i] - i
+   			
+   			li $v0, 11		### print char
+   			move $a0, $s1		#
+   			syscall			#
+   			j doneMEM	
+   		doneMEM:	
+   			#addu $t1, $t1, 1		# i++
+   			addi $s0, $s0, 1		# increment adress
+   			j criptWhile
+   		
+	encryptEnd:
+	li $v0, 4
+	la $a0, newl
+	syscall
 	jr $ra
 
 readCriptedText:
@@ -56,9 +139,9 @@ readCriptedText:
     	jr $ra
 
 readNormalText:
-	li $v0, 8       # take in input
-    	la $a0, normalTxt  # a0 = string u want to store in
-    	li $a1, 50      # a1 = size
+	li $v0, 8       	# take in input
+    	la $a0, normalTxt  	# a0 = string u want to store in
+    	li $a1, 50      	# a1 = size
     	syscall
     	jr $ra
 	
