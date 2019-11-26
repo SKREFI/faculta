@@ -147,6 +147,12 @@ decript:
 			j whileIndexNotFound
 		indexFound:
 		
+		li $t4, 4			#
+   		mult $t1, $t4			#
+   		mflo $t1 			### t2 = vD[t1]
+   		lw $t2, vectorDecriptare($t1)	#
+   		divu $t1, $t1, 4		#
+		
 		#addi $t1, $t1, -1
 		
 		blt $t1, $t2, diMvi		#   caci aveam probleme si
