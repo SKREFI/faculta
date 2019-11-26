@@ -17,6 +17,7 @@
 	lessThanTwoMsg: .asciiz "Nr. p este invalid"
 	exitMessage: .asciiz "SKREFI's out :D (ignora nickul =)"
 	isPrimeMsg: .asciiz "Este prim /debug /delete"
+	DEBUG: .asciiz "DEBUG"
 .text
 	
 main:
@@ -26,66 +27,14 @@ main:
 	sw $t0, argBuf		# de asemenea urc in argument Buffer pentru ulteriorul apel al functiei isPrime
 	jal isPrime		# exit if not prime / continue if it is
 	jal smallestGenerator	# saves the smallest generator to g (.data)
-	jal genVectorCriptat 	# saves the vector in vectorCriptare
+	jal genVectorCriptat 	# generate the vector using g and store in vectorCriptare
 	jal readNormalText	# read normalTxt
-	#jal readCriptedText	# read criptTxt
+	jal readCriptedText	# read criptTxt
 	jal cript		# cripteaza textul normal
 	jal genVectorDecriptat  # salvat in vectorDecriptare
-	#jal decript		# decripteaza textul citit
+	jal decript		# decripteaza textul citit
 	
 	j stopProgram 		# end_main ^_^
-
-decript:
-	la $s0, criptTxt
-	li $t1, 0
-	li $t2, 0
-	lw $s1, p
-	deWhile:
-		bgt $t1, $s1, decriptingDone
-		
-		li $v0, 1
-		lw $a0, vectorDecriptare($t2)
-		syscall
-		
-		addi $t1, $t1, 1
-		addi $t2, $t2, 4
-		j deWhile
-	decriptingDone:
-	jr $ra
-	
-genVectorDecriptat:
-	li $t1, 0				# merge din 4 in 4
-	li $t2, 0				# merge din 1 in 1
-	decriptVectorWhile:
-		lw $a0, vectorCriptare($t1)	# a0 = vc[t1]
-		beqz $a0, decriptVectorWhileDone# a iesit cand a intalnit 0 (care se afla la final mereu)
-		
-		li $t4, 4			### a0 *= 4
-		mult $a0, $t4			#
-		mflo $a0			#
-		addi $a0, $a0, -4 		# pentru a stora 0 2 1 4 5 3 in loc de 0 0 2 1 5 4 3
-							
-		sw $t2, vectorDecriptare($a0)
-				
-		addi $t2, $t2, 1		
-		addi $t1, $t1, 4		
-		j decriptVectorWhile
-	decriptVectorWhileDone:
-	
-	lw $s0, p
-	addi $s0, $s0, -1	# shift la stanga, trebuie sa fac asta, ref: linia 52
-	li $t4, 4		### p *= 4
-	mult $s0, $t4		#
-	mflo $s0		#
-	li $t1, 0		# contor i
-	test_:
-		lw $a0, vectorDecriptare($t1)
-		bge $t1, $s0, testDone
-		
-		addi $t1, $t1, 4
-		j test_
-	testDone:
-	jr $ra
 
 cript:
 	la $s0, normalTxt
@@ -144,6 +93,87 @@ cript:
 	la $a0, newl
 	syscall
 	jr $ra
+	
+genVectorDecriptat:
+	li $t1, 0				# merge din 4 in 4
+	li $t2, 0				# merge din 1 in 1
+	decriptVectorWhile:
+		lw $a0, vectorCriptare($t1)	# a0 = vc[t1]
+		beqz $a0, decriptVectorWhileDone# a iesit cand a intalnit 0 (care se afla la final mereu)
+		
+		li $t4, 4			### a0 *= 4
+		mult $a0, $t4			#
+		mflo $a0			#
+		addi $a0, $a0, -4 		# pentru a stora 0 2 1 4 5 3 in loc de 0 0 2 1 5 4 3
+		
+		sw $t2, vectorDecriptare($a0)
+				
+		addi $t2, $t2, 1		
+		addi $t1, $t1, 4		
+		j decriptVectorWhile
+	decriptVectorWhileDone:
+	
+	lw $s0, p
+	addi $s0, $s0, -1	# shift la stanga, trebuie sa fac asta, ref: linia 52
+	li $t4, 4		### p *= 4
+	mult $s0, $t4		#
+	mflo $s0		#
+	li $t1, 0		# contor i
+	test_:
+		lw $a0, vectorDecriptare($t1)
+		bge $t1, $s0, testDone
+		
+		addi $t1, $t1, 4
+		j test_
+	testDone:
+	jr $ra
+
+decript:
+	li $t8, 0
+	la $s0, criptTxt
+	deWhile:
+		lb $s1, 0($s0)
+		lb $t4, N
+		addi $s1, $s1, 1
+		beq $s1, $t4, decriptingDone
+		
+		li $t1, 0
+		lb $t4, A
+		
+		whileIndexNotFound:		#t1 = indexul literei
+			beq $t4, $s1, indexFound
+			addi $t1, $t1, 1
+			addi $t4, $t4, 1
+			j whileIndexNotFound
+		indexFound:
+		
+		#addi $t1, $t1, -1
+		
+		blt $t1, $t2, diMvi		#   caci aveam probleme si
+   		bgt $t1, $t2, dimvi		#   voiam sa fiu sigur ca aici
+   			j ddoneMEM
+   		diMvi:				# i > v[i]  			
+   			subu $t3, $t1, $t2
+   			subu $s1, $s1, $t3
+   			j ddoneMEM		#
+   		dimvi:				# i < v[i]
+   			subu $t3, $t2, $t1	# v[i] - i
+   			addu $s1, $s1, $t3	# a0 += v[i] - i
+   			j ddoneMEM	
+		ddoneMEM:
+		li $v0, 11
+   		move $a0, $t4
+   		syscall
+   		
+   		# Printez t4, ar trebui s1 in care storez valoare lui in functie
+   		# de contor i (t1) dar care-mi da output la altceva, am incercat
+   		# de o gramada de chestii, mult prea multe ore, am depus deja prea multe ore
+   		# la acest proiect si m-am saturat :)) asa ca o sa ma multumesc cu nota primita pe ce am facut. Multumesc.
+   		# Pentru un anumit se mai si blocheaza in acest loop si nu-mi mai ajunge la exitMsg... idk why	
+		addi $s0, $s0, 1
+		j deWhile
+	decriptingDone:
+	jr $ra
 
 readCriptedText:
 	li $v0, 8
@@ -160,6 +190,7 @@ readNormalText:
     	jr $ra
 	
 genVectorCriptat:
+	li $s7, 0
 	lw $s0, p		# s0 = p
 	lw $s1, g		# s1 = g
 	move $t0, $s1		# last = g
