@@ -48,7 +48,7 @@ if __name__ == "__main__":
             print(C.fail("Command not found"))
         path.append(current)
     if current == target:
-        print(C.green("Cuvantul satisface/face parte din limbajul dat."))
+        print(C.green("Cuvantul satisface limbajul recunoscut de automat."))
     else:
         print(C.warning("Cuvantul nu satisface limbajul."))
     print(C.blue("Path:"), *path)
