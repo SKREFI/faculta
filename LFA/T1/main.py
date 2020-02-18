@@ -25,7 +25,7 @@ if __name__ == "__main__":
     current = input(C.blue("Starting node: "))
     commands = input(C.blue("Instructions: "))
     commands = [x for x in commands]
-    target = input(C.blue("Target: "))
+    target = input(C.blue("Target(s): ")).split()  # Intrucerea mai multor noduri ca "finale" este acceptata
     if invalidCommands(commands, valid_comands) != None:
         print(C.fail("Invalids commands found:"), *
               invalidCommands(commands, valid_comands))
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         if commandFound == False:
             print(C.fail("Command not found"))
         path.append(current)
-    if current == target:
+    if current in target:
         print(C.green("Cuvantul satisface limbajul recunoscut de automat."))
     else:
         print(C.warning("Cuvantul nu satisface limbajul."))
