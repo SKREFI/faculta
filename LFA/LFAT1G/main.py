@@ -1,9 +1,9 @@
 from MyUtils import *
-
+import time
 # CONSTANTS:
 
 RADIUS = 20
-PADDING = 25
+PADDING = 10
 WIDTH = 1800
 HEIGHT = 900
 
@@ -96,12 +96,6 @@ def drawNodes(nodes):
 if __name__ == "__main__":
     # setup
     C = COL()
-    pathBtn = CreateRectangle(
-        Point(PADDING, HEIGHT - PADDING),
-        Point(150, HEIGHT - 70),
-        "Show Path",
-        "yellow"
-    )
 
     collumn = CreateRectangle(
         Point(WIDTH - 300, HEIGHT - PADDING),
@@ -110,7 +104,29 @@ if __name__ == "__main__":
         color_rgb(100, 100, 100)
     )
 
+    pathBtn = CreateRectangle(
+        Point(PADDING, HEIGHT - PADDING),
+        Point(150, HEIGHT - 70),
+        "Show Path",
+        "yellow"
+    )
+
+    previousWordBtn = CreateRectangle(
+        Point(150 + PADDING, HEIGHT - PADDING),
+        Point(300 + PADDING, HEIGHT - 70),
+        "Previous Word",
+        color_rgb(0, 100, 255)
+    )
+
+    nextWordBtn = CreateRectangle(
+        Point(2 * PADDING + 300, HEIGHT - PADDING),
+        Point(450, HEIGHT - 70),
+        "Next Word",
+        "blue"
+    )
+
     words = []
+    wordsTextObjects = []
     startingListPoint = Point(collumn.getCenter().getX(), 30 + PADDING)
     with open("words.in", "r") as f:
         inp = f.readline().strip("\n")
@@ -120,15 +136,16 @@ if __name__ == "__main__":
             text.setTextColor("white")
             text.setSize(20)
             text.draw(s)
+            wordsTextObjects.append(text)
             startingListPoint.y += 30
             inp = f.readline().strip("\n")
 
     targets = []
     with open("targets.in", "r") as f:
-        inp = f.readline()
+        inp = f.readline().strip("\n")
         while inp:
             targets.append(inp)
-            inp = f.readline()
+            inp = f.readline().strip("\n")
 
     starting = ""
     with open("starting.in", "r") as f:
@@ -146,15 +163,25 @@ if __name__ == "__main__":
     isGood, path, arrow_from_nodes, all_nodes = BackEnd(
         starting, "aaaaca", targets)
     all_nodes.sort()
+
+    indicationNod = Text(
+        Point(700, HEIGHT - 40), "Please place nod:")
+    indicationNod.setSize(36)
+    indicationNod.setTextColor("White")
+    indicationNod.draw(s)
     nodes_id_p = []
     for nod in all_nodes:
+        drawNowText = Text(Point(920, HEIGHT - 40), nod)
+        drawNowText.setTextColor("blue")
+        drawNowText.setSize(36)
+        drawNowText.draw(s)
         p = s.getMouse()
         nodes_id_p.append(NodeDest(nod, p))
         c = Circle(p, 30)
         c.setFill("white")
         c.setWidth(3)
         c.draw(s)
-        if nod in starting:
+        if nod == starting:
             marc = Circle(p, 23)
             marc.setWidth(12)
             marc.setOutline("green")
@@ -167,7 +194,9 @@ if __name__ == "__main__":
         p.y += 50
         t = Text(p, nod)
         t.draw(s)
+        drawNowText.undraw()
         p.y -= 50
+    indicationNod.undraw()
 
     print(*nodes)
     self_pointing = []
@@ -201,7 +230,6 @@ if __name__ == "__main__":
                     l.append(p.arrow)
                     self_pointing.append(tuple(l))
 
-    print(self_pointing)
     for t in self_pointing:
         Text(t[0], t[1]).draw(s)
         marc = Circle(t[0], 23)
@@ -209,12 +237,79 @@ if __name__ == "__main__":
         marc.setOutline("yellow")
         marc.draw(s)
 
+    leftListArrowPoint = Point(collumn.getCenter().getX() - 120, 30 + PADDING)
+    rightListArrowPoint = Point(collumn.getCenter().getX() - 80, 30 + PADDING)
+    listArrow = Line(leftListArrowPoint, rightListArrowPoint)
+    listArrow.setArrow("last")
+    listArrow.setFill("blue")
+    listArrow.setWidth(6)
+    listArrow.draw(s)
+
+    wordIndex = 0
+
+    if isGood:
+        wordsTextObjects[wordIndex].setFill("#33ff00")
+    else:
+        wordsTextObjects[wordIndex].setFill("red")
+
     # run
     while True:
         p = s.getMouse()
         print(p)
         if isInside(p, pathBtn):
             print("pathBtn pressed")
-            continue
+            print(C.warning("Path for word: " + words[wordIndex]))
+            print(*[C.warning(x) + " " for x in path])
+            for nod in nodes_id_p:
+                if starting == nod.id:
+                    c = Circle(nod.point, 35)
+                    c.setWidth(5)
+                    c.setOutline("#a0ff10")
+                    c.draw(s)
+                    time.sleep(0.8)
+                    c.undraw()
+                    break
+            nthNodeIndex = 1
+            for ni in path:
+                p = Point(0, 0)
+                for nod in nodes_id_p:
+                    if ni == nod.id:
+                        p = nod.point
+                print(C.warning(str(nthNodeIndex) + ": " + ni))
+                nthNodeIndex += 1
+                time.sleep(0.25)
+                c = Circle(p, 35)
+                c.setWidth(5)
+                c.setOutline("#a0ff10")
+                c.draw(s)
+                time.sleep(0.6)
+                c.undraw()
 
+            continue
+        elif isInside(p, nextWordBtn):
+            print("nextWordBtn pressed")
+            if wordIndex < len(words) - 1:
+                listArrow.move(0, 30)
+                wordIndex += 1
+                if BackEnd(starting, words[wordIndex], targets) != None:
+                    isGood, path, arrow_from_nodes, all_nodes = BackEnd(
+                        starting, words[wordIndex], targets)
+                else:
+                    print(C.fail("Command not found for node: " + starting))
+
+                if isGood:
+                    wordsTextObjects[wordIndex].setFill("#33ff00")
+                else:
+                    wordsTextObjects[wordIndex].setFill("red")
+            else:
+                print(C.fail("List of words completed!"))
+        elif isInside(p, previousWordBtn):
+            print("previousWordBtn pressed")
+            if wordIndex > 0:
+                listArrow.move(0, -30)
+                wordIndex -= 1
+
+                if BackEnd(starting, words[wordIndex], targets) != None:
+                    isGood, path, arrow_from_nodes, all_nodes = BackEnd(
+                        starting, words[wordIndex], targets)
     s.close()

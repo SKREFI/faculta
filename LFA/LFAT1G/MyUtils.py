@@ -97,6 +97,8 @@ def BackEnd(startingNode, word, target_list, ):
     for c in commands:                  # pentru fiecare comanda
         commandFound = False            # tinem conta daca gasim pentru afisarea erori
         # pentru fiecare obiect in lista de obiecte in care se poate ajunge din current
+        if current not in d.keys():
+            return None
         for o in d[current]:
             if c == o.command:          # daca comanda convine
                 commandFound = True     #
