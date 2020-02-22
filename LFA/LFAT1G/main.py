@@ -257,7 +257,7 @@ if __name__ == "__main__":
         p = s.getMouse()
         print(p)
         if isInside(p, pathBtn):
-            print("pathBtn pressed UPDATED FOR GITHUB TESTS")
+            print("pathBtn pressed")
             print(C.warning("Path for word: " + words[wordIndex]))
             print(*[C.warning(x) + " " for x in path])
             for nod in nodes_id_p:
