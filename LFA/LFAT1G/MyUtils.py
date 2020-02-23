@@ -51,7 +51,7 @@ def invalidCommands(commands, valid_commands):
     return invalid
 
 
-def BackEnd(startingNode, word, target_list, ):
+def BackEnd(startingNode, word, target_list):
     C = COL()           # Initializare clasa culori
     d = {}              # Dictionar in care pun NOD -> {Matrici -> Rezultat}
     valid_comands = []  # Storez toate "literele" limabjului
@@ -105,6 +105,7 @@ def BackEnd(startingNode, word, target_list, ):
                 current = o.destination       # current devine destinatia comenzii
         if commandFound == False:
             print(C.fail("Command not found"))
+            return None
         path.append(current)
     good_word = False
     if current in target:

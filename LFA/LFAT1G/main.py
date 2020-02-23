@@ -275,15 +275,16 @@ if __name__ == "__main__":
                 for nod in nodes_id_p:
                     if ni == nod.id:
                         p = nod.point
-                print(C.warning(str(nthNodeIndex) + ": " + ni))
-                nthNodeIndex += 1
-                time.sleep(0.25)
-                c = Circle(p, 35)
-                c.setWidth(5)
-                c.setOutline("#a0ff10")
-                c.draw(s)
-                time.sleep(0.6)
-                c.undraw()
+                        print(C.warning(str(nthNodeIndex) + ": " + ni))
+                        nthNodeIndex += 1
+                        time.sleep(0.25)
+                        c = Circle(p, 35)
+                        c.setWidth(5)
+                        c.setOutline("#a0ff10")
+                        c.draw(s)
+                        time.sleep(0.6)
+                        c.undraw()
+                        break
 
             continue
         elif isInside(p, nextWordBtn):
@@ -296,6 +297,7 @@ if __name__ == "__main__":
                         starting, words[wordIndex], targets)
                 else:
                     print(C.fail("Command not found for node: " + starting))
+                    isGood = False
 
                 if isGood:
                     wordsTextObjects[wordIndex].setFill("#33ff00")
