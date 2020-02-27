@@ -1,0 +1,1 @@
+Namespace(action='display', end_date='2020-01-10', file='output.out', filter='distance:', number=10, start_date='2020-01-01')
