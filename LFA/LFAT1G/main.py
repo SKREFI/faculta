@@ -160,8 +160,11 @@ if __name__ == "__main__":
             nodes.append(nod)
             inp = f.readline().split()
 
-    isGood, path, arrow_from_nodes, all_nodes = BackEnd(
-        starting, "aaaaca", targets)
+    if BackEnd(starting, words[0], targets) == None:
+        print(C.fail(""))
+    else:
+        isGood, path, arrow_from_nodes, all_nodes = BackEnd(
+            starting, words[0], targets)
     all_nodes.sort()
 
     indicationNod = Text(
@@ -315,3 +318,17 @@ if __name__ == "__main__":
                     isGood, path, arrow_from_nodes, all_nodes = BackEnd(
                         starting, words[wordIndex], targets)
     s.close()
+
+
+# 1 a 2
+# 2 a 1
+# 1 b 3
+# 3 b 4
+# 4 b 5
+# 5 b 3
+
+# starting 1
+
+# tartget 1, 5
+
+# aaabbbbbb

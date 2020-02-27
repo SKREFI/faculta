@@ -1,14 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define AND &&
-
-#define OR ||
-
-#define NOT !
-
-#define IS ==
-
 int getRandom(int min, int max) { return rand() % max + min; }
 vector<int> range(int stop) {
     vector<int> ret;
@@ -51,10 +43,10 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
 }
 // overlaoding pentru Pair
 template <typename T, typename S>
-ostream &operator<<(ostream &os, const pair<T, S> &v) {
-    os << "(";
-    os << v.first << ", " << v.second << ")";
-    return os;
+ostream &operator<<(ostream &out, const pair<T, S> &v) {
+    out << "(";
+    out << v.first << ", " << v.second << ")";
+    return out;
 }
 template <class T>
 void print(T print, string sep = " ", string end = "\n") {
@@ -160,7 +152,7 @@ class Polinom {
         }
     }
     // oprator overloading
-    friend ostream &operator<<(ostream &out, Polinom &p) {
+    friend ostream &operator<<(ostream &out, Polinom p) {
         int n = p.getCo().size();
         int c = p.getCo()[0];
         char l = 'X';
@@ -189,7 +181,6 @@ class Polinom {
                     } else {
                         out << " - " << -c << l << "^" << n - 1 - i;
                     }
-
                 } else {
                     if (n - 1 - i == 1) {
                         out << " + " << c << l;
@@ -201,13 +192,32 @@ class Polinom {
                 }
             }
         }
+        // TOASK: De ce nu pot sa iau direct litera
+        // print(this->litere[0]);
         return out;
     }
     // geters/seters
     vector<int> getCo() { return this->coeficienti; };
-    char getLitera(int i) {  // TOASK: De ce nu pot sa iau direct litera
-        return this->litere[i];
+    char getLitera(int i) { return this->litere[i]; }
+};
+
+template <class T>
+class Matrice {
+    vector<vector<T>> m;
+    // constructor
+    Matrice(int len, T init) {
+        vector<vector<T>> ret;
+        for (auto _ : range(len)) {
+            vector<T> linie;
+            for (auto __ : range(len)) {
+                linie.push_back(0);
+            }
+            ret.push_back(linie);
+        }
+        m = ret;
     }
+
+    vector<vector<T>> getMatrice() { return m; }
 };
 
 int main() {
@@ -226,8 +236,10 @@ int main() {
     print(p.solve());
     // TOASK: Cum fac sa pot scrie p = Polinom({vector}) ca sa nu definesc altul
     Polinom p2({1, -2, 1});
-    print(p2);
+
     print(p2.solve());
+
+    // Matrice<int> m(4, 0);
 
     print("\n\n");
     return 0;
