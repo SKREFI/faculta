@@ -1,7 +1,7 @@
-id,full_name,price
-prime,Avira Prime,75
-pro,Antivirus PRO,35
-vpn,Phantom VPN,50
-pass,Password Manager,20
-opt,Optimizer,10
-speed,System Speedup,25
+id,full_name,price,stoc
+prime,Avira Prime,75,20
+pro,Antivirus PRO,35,20
+vpn,Phantom VPN,50,20
+pass,Password Manager,20,20
+opt,Optimizer,10,20
+speed,System Speedup,25,20

@@ -14,8 +14,8 @@ class CSVImporter(ABC):
         products = {}
 
         file = pandas.read_csv(path, header=0)
-
         for index, row in file.iterrows():
-            products[row['id']] = Product(row['full_name'], row['price'])
+            products[row['id']] = Product(
+                row['full_name'], row['price'], row['stoc'])
 
         return products
