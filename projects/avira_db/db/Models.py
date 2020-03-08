@@ -27,6 +27,10 @@ class Client():
             raise Exception('Email not valid')
         return True
 
-    def __repr__(self):
-        return f'{self.email}'
+    @classmethod
+    def getMail(self):
+        return self.mail
 
+
+    def __repr__(self):
+        return '{}'.format(self.email)

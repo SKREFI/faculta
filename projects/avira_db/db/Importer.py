@@ -1,7 +1,7 @@
 import pandas
 from abc import ABC
 
-from database.models import Product
+from db.Models import Product
 
 
 class CSVImporter(ABC):
