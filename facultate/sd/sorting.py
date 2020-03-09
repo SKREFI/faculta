@@ -1,112 +1,40 @@
-from math import log
-from random import randint as r
-import time
-
-from abc import ABC
-
-
-class SortingInterface(ABC):
-
-    def Radix(self, inp, BASE = 256):
-        if len(inp) == 0:
-            return []
-
-        digits = (int(log(max(inp), BASE)) + 1)
-
-        def setup():
-            d = {}
-            for i in range(BASE):
-                d[i] = []
-            return d
-
-        def dicToList(d):
-            l = []
-            for values in d.values():
-                for value in values:
-                    l.append(value)
-            return l
-
-        key = 1  # adica cifra unitatilor (abcd // key = d)
-        for _ in range(digits):
-            d = setup()
-            for i in inp:
-                d[(i//key) % BASE].append(i)
-            inp = dicToList(d)
-            key *= BASE
-        return inp
-
-    Functions = {
-        'radix' : Radix 
-    }
-
-    @staticmethod
-    def get_efficiency(cls, sorting_function):
-        f = Functions.[sorting_function]
-        
-        
-        return int(round(time.time() * 1000))
-
-
-class Sorters(SortingInterface):
-    def __init__(self, sorting_function):
-        print(super().get_efficiency(self, sorting_function))
-
-
-def radix(inp, BASE):
-    if len(inp) == 0:
-        return []
-    digits = (int(log(max(inp), BASE)) + 1)
-
-    def setup():
-        d = {}
-        for i in range(BASE):
-            d[i] = []
-        return d
-
-    def dicToList(d):
-        l = []
-        for values in d.values():
-            for value in values:
-                l.append(value)
-        return l
-
-    key = 1  # adica cifra unitatilor (abcd // key = d)
-    for _ in range(digits):
-        d = setup()
-        for i in inp:
-            d[(i//key) % BASE].append(i)
-        inp = dicToList(d)
-        key *= BASE
-    return inp
-
+from Sorters import *
 
 # def bubble(inp):
 # def merge(inp):
 # def quick(inp):
 
-def countSort(inp):
-    l = [0 for _ in range(max(inp) + 1)]
-    for i in inp:
-        l[i] += 1
-    ret = []
-    index = 0
-    for i in l:
-        for _ in range(i):
-            ret.append(index)
-        index += 1
-    return ret
 
+def test(function, name, debugger=False, no_tests=10, lists_length=1000, min_num=0, max_num=10**10):
+    def getms():
+        return int(round(time.time() * 1000))
 
-def getRandomList(length, min, max):
-    l = []
-    for _ in range(length):
-        l.append(r(min, max))
-    return l
+    def getRandomList(length, min, max):
+        l = []
+        for _ in range(length):
+            l.append(r(min, max))
+        return l
 
-
-def getms():
-    return int(round(time.time() * 1000))
+    times = []
+    for i in range(no_tests):
+        inp = getRandomList(lists_length, min_num, max_num)
+        start = getms()
+        result = function(inp)
+        stop = getms()
+        if result != sorted(inp):
+            raise Exception(Log.fail('Function did a bad job!'))
+        if debugger:
+            Log.debug(f'Test {i+1} out of {no_tests}\'s time: {stop-start}')
+            Log.debug(f'List: {result}')
+        times.append(stop - start)
+    print(Log.succes(f'{name} function\'s tme: {sum(times)/len(times)}'))
 
 
 if __name__ == "__main__":
-    s = Sorters("bubble")
+    sorters = {
+        'Radix': radix,
+        'Count': count
+    }
+
+    test(quick, 'Name', debugger=True, no_tests=5,
+         lists_length=5, min_num=0, max_num=10)
