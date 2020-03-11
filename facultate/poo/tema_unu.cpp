@@ -49,8 +49,8 @@ ostream &operator<<(ostream &out, const pair<T, S> &v) {
     return out;
 }
 template <class T>
-void print(T print, string sep = " ", string end = "\n") {
-    cout << print << sep << end;
+void print(T x, string sep = " ", string end = "\n") {
+    cout << x << sep << end;
 }
 
 class Complex {
@@ -208,8 +208,55 @@ class Polinom {
 template <class T>
 class Matrice {
     vector<vector<T>> m;
-    // constructor
+    // constructor care poate genera o matrice cu numere random
    public:
+    // sper ca nu e dubios, vreau un constructor, care sa-mi genereze o matrice
+    // cu elemente random, alese dintr-o lista, fiecare element avand si o probabilitate
+    // Am facut un pair, cu elemente, sa zicem
+    // Matice<char>(5,5, {make_pair('a', 20), make_pair('b', 30)}, default = '0')
+    //    ==> o matrice cu 25 de elemente dintre care aproximativ 20% adica 5 o sa fie 'a'-uri
+    // Fac asta mai mult pentru D10, (matrice de 'indivizi')
+    Matrice(int linii, int coloane, vector<pair<T, float>> choices, T def) {
+        vector<vector<T>> ret;
+        for (auto _ : range(linii)) {
+            vector<T> linie;
+            for (auto __ : range(coloane)) {
+                linie.push_back(def);
+            }
+            ret.push_back(linie);
+        }
+        int total_items = linii * coloane;
+        for (auto p : choices) {
+            T item = p.first;
+            int chance = p.second;
+
+            //sansa * cate spatii sunt pentru a obitne cate obiecte de tipul X trebuie plasate in matrice
+            float no_obj = chance / 100.0f * total_items;
+            int placed = 0;
+
+            // in caza ca mai sunt obiecte de pus pe matrice dar nu mai e loc sau sunt prea putin locuri, cum i si j se aleg la
+            // intmplare programul poate ramane foarte mult blocat pe taskul ast
+            // fool proof adica, se aplica si in cazu in care sansa lui a este de 100, si a lui b de 20, le ia in ordine
+            int over_trying_counter = 0;
+            while (placed < no_obj) {
+                int i = getRandom(0, linii);
+                int j = getRandom(0, coloane);
+
+                if (over_trying_counter > 1000)
+                    break;
+
+                if (ret[i][j] == def) {
+                    placed++;
+                    ret[i][j] = item;
+                    over_trying_counter = 0;
+                }
+                over_trying_counter++;
+            }
+        }
+
+        m = ret;
+    }
+
     Matrice(int linii, int coloane, bool randomInt = true, int min = 0,
             int max = 0) {
         vector<vector<int>> ret;
@@ -217,7 +264,7 @@ class Matrice {
             vector<int> linie;
             for (auto __ : range(coloane)) {
                 if (randomInt)
-                    linie.push_back(getRandom(min, max));
+                    linie.push_back(getRandom(min, max + 1));
                 else
                     linie.push_back(0);
             }
@@ -225,6 +272,7 @@ class Matrice {
         }
         m = ret;
     }
+    // Constructor care initializeaza matricea cu on anumit obiect
     Matrice(int linii, int coloane, T init) {
         vector<vector<T>> ret;
         for (auto _ : range(linii)) {
@@ -237,8 +285,6 @@ class Matrice {
         m = ret;
     }
 
-    vector<vector<T>> getMatrice() { return m; }
-
     friend ostream &operator<<(ostream &out, const Matrice &mat) {
         for (auto line : mat.m) {
             for (auto e : line) {
@@ -249,37 +295,40 @@ class Matrice {
         return out;
     }
 
-    void printMatrice() {
+    int getNoInstanceOf(T instance) {
+        int counter = 0;
         for (auto line : m) {
-            for (auto e : line) {
-                print(e, " ", "");
+            for (auto element : line) {
+                if (element == instance)
+                    counter++;
             }
-            print("");
         }
+        return counter;
     }
 };
 
 int main() {
     srand(time(NULL));
 
-    // COMPLEX
-    // Complex c(2, 3);
-    // Complex c2(5, 6);
+    Complex c(2, 3);
+    Complex c2(5, 6);
     // cout << "Impartire: " << c / c2 << '\n';
-    // cout << "Inmultire: " << c * c2 << '\n';
     // cout << "Adunare: " << c + c2 << '\n';
-    // cout << "Scadere: " << c - c2 << '\n';
-    // cout << "Modul: " << (c).modul() << '\n';  // sqrt(13)
-    // POLINOM
-    // Polinom p({1, -2, 2});
-    // print(p);
-    // print(p.solve());
-    // print(Polinom({1, -2, 1}).solve());
+    // cout << "Modul: " << c.modul() << '\n';  // sqrt(13)
+    Polinom p({1, -2, 2});  // solutii imaginare
+    print(p);
+    print(p.solve());
+    print(Polinom({1, -2, 1}).solve());  // o singur solutie reala
 
-    Matrice<int> m(4, 4, true, 0, 10);
+    Matrice<int> m(5, 5, true, 0, 9);
+    // print(m);
 
-    // m.printMatrice();
-    print(m);
+    Matrice<char> m2(10, 300, {make_pair('a', 15), make_pair('b', 25), make_pair('X', 50)}, '0');
+    print(m2);
+
+    for (auto a : {'a', 'b', 'X', '0'})
+        print(m2.getNoInstanceOf(a)); // de cate ori apare fiecare element
+
     print("\n\n");
     return 0;
 }
