@@ -1,5 +1,0 @@
-setup.py
-avira.egg-info/PKG-INFO
-avira.egg-info/SOURCES.txt
-avira.egg-info/dependency_links.txt
-avira.egg-info/top_level.txt

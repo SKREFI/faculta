@@ -3,10 +3,6 @@ from random import randint as r
 import time
 
 
-def swap(a, b):
-    a, b = b, a
-
-
 def quick(inp, low=0, high=-1):
     def partition(inp, low, high):
         i = low-1
@@ -15,10 +11,8 @@ def quick(inp, low=0, high=-1):
         for j in range(low, high):
             if inp[j] < pivot:
                 i = i+1
-                # swap(inp[i], inp[j])
                 inp[i], inp[j] = inp[j], inp[i]
 
-        # swap(inp[i+1], inp[high])
         inp[i+1], inp[high] = inp[high], inp[i+1]
         return i+1
 
@@ -79,6 +73,68 @@ def count(inp):
             ret.append(index)
         index += 1
     return ret
+
+
+def systemSort(inp):
+    return sorted(inp)
+
+
+def merge(inp):
+    def merge_helper(arr):
+        if len(arr) > 1:
+            mid = len(arr)//2
+            L, R = arr[:mid], arr[mid:]
+            merge_helper(L)
+            merge_helper(R)
+
+            i = j = k = 0
+
+            while i < len(L) and j < len(R):
+                if L[i] < R[j]:
+                    arr[k] = L[i]
+                    i += 1
+                else:
+                    arr[k] = R[j]
+                    j += 1
+                k += 1
+
+            while i < len(L):
+                arr[k] = L[i]
+                i += 1
+                k += 1
+
+            while j < len(R):
+                arr[k] = R[j]
+                j += 1
+                k += 1
+    merge_helper(inp)
+    return inp
+
+
+def test(function, name, debugger=False, no_tests=10, lists_length=1000, min_num=0, max_num=10**10):
+    def getms():
+        return int(round(time.time() * 1000))
+
+    def getRandomList(length, min, max):
+        l = []
+        for _ in range(length):
+            l.append(r(min, max))
+        return l
+
+    times = []
+    for i in range(no_tests):
+        inp = getRandomList(lists_length, min_num, max_num)
+        start = getms()
+        result = function(inp)
+        stop = getms()
+        if result != sorted(inp):
+            # raise Exception(Log.fail('Function did a bad job!'))
+            Log.fail('Function did a bad job!')
+        if debugger:
+            Log.debug(f'Test {i+1}/{no_tests} time: {stop-start}')
+            Log.debug(f'List: {result}')
+        times.append(stop - start)
+    print(Log.succes(f'{name} function\'s time: {sum(times)/len(times)} ms'))
 
 
 class Log():
