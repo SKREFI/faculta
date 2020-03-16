@@ -1,7 +1,0 @@
-#!/home/skrefi/p/things/projects/exercise/env/bin/python
-import pcsv
-from jtutils import fix_broken_pipe
-
-if __name__ == "__main__":
-    fix_broken_pipe()
-    pcsv.pcsv()
