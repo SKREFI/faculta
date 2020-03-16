@@ -3,6 +3,15 @@ from random import randint as r
 import time
 
 
+class SorterDetails():
+    def __init__(self, name: str, time: str):
+        self.name = name
+        self.time = time
+
+    def __repr__(self):
+        return f'{self.name} -> {self.time} ms'
+
+
 def quick(inp, low=0, high=-1):
     def partition(inp, low, high):
         i = low-1
@@ -110,8 +119,15 @@ def merge(inp):
     merge_helper(inp)
     return inp
 
+def test(**args):
+    function = args.get('function', systemSort)
+    name = args.get('name', 'System')
+    debugger = args.get('debugger', False)
+    no_tests = args.get('no_tests', 10)
+    lists_length = args.get('lists_length', 1000)
+    min_num = args.get('min_num', 0)
+    max_num=args.get('max_num', 10**3)
 
-def test(function, name, debugger=False, no_tests=10, lists_length=1000, min_num=0, max_num=10**10):
     def getms():
         return int(round(time.time() * 1000))
 
@@ -134,8 +150,8 @@ def test(function, name, debugger=False, no_tests=10, lists_length=1000, min_num
             Log.debug(f'Test {i+1}/{no_tests} time: {stop-start}')
             Log.debug(f'List: {result}')
         times.append(stop - start)
-    print(Log.succes(f'{name} function\'s time: {sum(times)/len(times)} ms'))
-
+    Log.succes(f'{name} function\'s time: {sum(times)/len(times)} ms')
+    return sum(times)/len(times)
 
 class Log():
     end = '\033[0m'
