@@ -1,6 +1,32 @@
 from math import log
 from random import randint as r
+import random
 import time
+
+
+class Log():
+    end = '\033[0m'
+
+    @classmethod
+    def warning(cls, inp):
+        print('\033[93m' + inp + cls.end)
+
+    @classmethod
+    def fail(cls, inp):
+        print('\033[91m' + inp + cls.end)
+
+    @classmethod
+    def succes(cls, inp):
+        print('\033[92m' + inp + cls.end)
+
+    @classmethod
+    def debug(cls, inp):
+        print('\033[94m' + inp + cls.end)
+
+    @classmethod
+    def getAllStyles(cls):
+        for i in range(100):
+            print(f'\033[{i}mNumber{i}\033[0m')
 
 
 class SorterDetails():
@@ -13,25 +39,28 @@ class SorterDetails():
 
 
 def quick(inp, low=0, high=-1):
-    def partition(inp, low, high):
-        i = low-1
-        pivot = inp[high]
+    try:
+        def partition(inp, low, high):
+            i = low-1
+            pivot = inp[high]
 
-        for j in range(low, high):
-            if inp[j] < pivot:
-                i = i+1
-                inp[i], inp[j] = inp[j], inp[i]
+            for j in range(low, high):
+                if inp[j] < pivot:
+                    i = i+1
+                    inp[i], inp[j] = inp[j], inp[i]
 
-        inp[i+1], inp[high] = inp[high], inp[i+1]
-        return i+1
+            inp[i+1], inp[high] = inp[high], inp[i+1]
+            return i+1
 
-    if high == -1:
-        high += len(inp)
-    if low < high:
-        pi = partition(inp, low, high)
-        quick(inp, low, pi-1)
-        quick(inp, pi+1, high)
-    return inp
+        if high == -1:
+            high += len(inp)
+        if low < high:
+            pi = partition(inp, low, high)
+            quick(inp, low, pi-1)
+            quick(inp, pi+1, high)
+        return inp
+    except:
+        pass
 
 
 def bubble(inp):
@@ -119,6 +148,7 @@ def merge(inp):
     merge_helper(inp)
     return inp
 
+
 def test(**args):
     function = args.get('function', systemSort)
     name = args.get('name', 'System')
@@ -126,7 +156,7 @@ def test(**args):
     no_tests = args.get('no_tests', 10)
     lists_length = args.get('lists_length', 1000)
     min_num = args.get('min_num', 0)
-    max_num=args.get('max_num', 10**3)
+    max_num = args.get('max_num', 10**3)
 
     def getms():
         return int(round(time.time() * 1000))
@@ -153,26 +183,37 @@ def test(**args):
     Log.succes(f'{name} function\'s time: {sum(times)/len(times)} ms')
     return sum(times)/len(times)
 
-class Log():
-    end = '\033[0m'
 
-    @classmethod
-    def warning(cls, inp):
-        print('\033[93m' + inp + cls.end)
+def bogo(inp):
+    if len(inp) > 9:
+        Log.fail('LIST TO BIG FOR BOGO! This is not supposed to be used lmao')
+    while not inp == sorted(inp):
+        random.shuffle(inp)
+    return inp
 
-    @classmethod
-    def fail(cls, inp):
-        print('\033[91m' + inp + cls.end)
 
-    @classmethod
-    def succes(cls, inp):
-        print('\033[92m' + inp + cls.end)
+def gnomepp(inp):
+    def _gnome(inp, limit):
+        pos = limit
+        while pos > 0 and inp[pos - 1] > inp[pos]:
+            inp[pos - 1], inp[pos] = inp[pos], inp[pos - 1]
+            pos -= 1
 
-    @classmethod
-    def debug(cls, inp):
-        print('\033[94m' + inp + cls.end)
+    for pos in range(1, len(inp)):
+        _gnome(inp, pos)
+    return inp
 
-    @classmethod
-    def getAllStyles(cls):
-        for i in range(100):
-            print(f'\033[{i}mNumber{i}\033[0m')
+
+def gnome(inp):
+    i = 0
+    while i < len(inp):
+        if i == 0 or inp[i] >= inp[i-1]:
+            i += 1
+        else:
+            inp[i], inp[i-1] = inp[i-1], inp[i]
+            i -= 1
+
+
+if __name__ == '__main__':
+
+    pass

@@ -8,6 +8,8 @@ In **Sorters.py** sunt toate functile de sortare implementate, o mica clasa cu r
 - Radix
 - Merge
 - Count
-
+- Gnome Standard 
+- Gnome Optimizat
+- Bogo :))) (nu este adaugata in lista de comparatii bine inteles, also, am facut sa refuze lista mai amre decat 9 elemente)
 
 ```
