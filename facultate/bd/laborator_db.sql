@@ -65,6 +65,94 @@ select *
 from employees e full outer join departments d
 on e.department_id = d.department_id;
 
+select department_id "Cod Dep"
+from employees
+where job_id='SA_REP'
+UNION
+select department_id
+from DEPARTMENTS
+where lower(department_name) like '%re%';
+
+
+select department_id "Cod Dep"
+from departments
+MINUS
+select department_id
+from employees;
+
+select last_name
+from employees;
+
+select last_name, hire_date, department_id
+from employees
+where department_id = (select department_id
+                       from employees
+                        where last_name = 'Ernst');
+
+
+SELECT e.last_name, d.department_name, e.salary, j.job_title
+FROM employees e, departments d, jobs j
+WHERE e.department_id = d.department_id
+AND e.job_id = j.job_id
+AND (e.salary, e.commission_pct) IN  (SELECT salary, commission_pct
+                    FROM employees
+                    WHERE department_id IN (SELECT department_id
+                                            FROM departments
+                                            WHERE location_id IN (SELECT location_id
+                                                                 FROM locations
+                                                                 WHERE LOWER(city)='oxford')));
+                                            
+                                            
+
+
+SELECT department_id
+FROM departments
+WHERE location_id IN
+(SELECT location_id
+FROM locations
+WHERE LOWER(city) = 'oxford');
+
+
+--15
+select employee_id, first_name, salary
+from employees e
+where salary > 3000 or (job_id, salary) in (select job_id, (j.MAX_SALARY + j.min_salary) / 2
+                           from jobs j
+                           where j.job_id = e.job_id);
+
+--18
+select first_name, salary
+from employees
+where manager_id = (select employee_id
+                   from employees
+                   where manager_id is null);
+
+--19
+select first_name, department_id, salary
+from employees e
+where (e.department_id, e.salary) in (select department_id, salary
+                                    from employees
+                                    where commission_pct is not null);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
