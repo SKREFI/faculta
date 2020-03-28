@@ -72,7 +72,7 @@ def bubble(inp):
     return inp
 
 
-def radix(inp, BASE=256):
+def radix(inp, BASE=1000):
     if len(inp) == 0:
         return []
     digits = (int(log(max(inp), BASE)) + 1)
@@ -215,5 +215,6 @@ def gnome(inp):
 
 
 if __name__ == '__main__':
-
-    pass
+    l = [9, 7, 6, 5, 4, 3]
+    print(bubble(l))
+    print(l)

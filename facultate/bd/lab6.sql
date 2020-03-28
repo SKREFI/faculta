@@ -135,15 +135,46 @@ where (e.department_id, e.salary) in (select department_id, salary
                                     where commission_pct is not null);
 
 
+select count(department_id)
+from departments;
 
 
+select job_id, max(salary) max, min(salary) min, round(sum(salary)/count(salary)) media, sum(salary) sum
+from employees
+group by job_id;
 
 
+select employee_id, first_name, last_name
+from employees
+where salary > (select avg(salary) from employees)
+order by salary desc;
+
+--Not wokring
+select d.department_id, d.department_name, max(salary)
+from departments d, employees e
+where e.department_id = d.department_id
+group by e.department_id, d.department_name
+having max(e.salary) > 7000;
 
 
+select max(round(avg(salary)))
+from departments d, employees e
+where e.department_id = d.department_id
+group by d.department_id, d.department_name;
+
+select d.department_id, d.department_name, round(sum(salary))
+from departments d, employees e
+where e.department_id = d.department_id
+group by d.department_id, d.department_name
+having round(sum(salary)) = (select min(round(sum(salary)))
+                            from departments d, employees e
+                            where e.department_id = d.department_id
+                            group by d.department_id, d.department_name);
 
 
-
+select avg(salary)
+from employees
+having avg(salary) > 2500;
 
 
 

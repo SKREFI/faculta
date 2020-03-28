@@ -253,8 +253,8 @@ class Matrice {
         // sanity check
         for (auto line : m) {
             if (m.size() != line.size()) {
-                print("No good!");
-                // raise exception
+                print("No good! 1");
+                throw;
             }
         }
         for (auto line : other.m) {
@@ -264,11 +264,12 @@ class Matrice {
             }
         }
         if (m[0].size() != other.m.size()) {
-            print("No good");
+            print("No good 2");
+            throw invalid_argument("asdasd");
             // raise exception
         }
 
-        Matrice<T> ret(m.size(), other.m[0].size(), Complex(0, 0));
+        Matrice<T> ret(m.size(), other.m[0].size(), 0);
 
         for (int i = 0; i < m.size(); i++) {
             for (int k = 0; k < other.m[0].size(); k++) {
@@ -295,33 +296,44 @@ class Matrice {
 int main() {
     srand(time(NULL));
 
-    // Declararea unei matrice
-    //@params: lini, cloane, initializare
-    Matrice<Complex> m(4, 4, Complex(1, 1));
-    // Printare
-    print("Matrice M:");
+    Complex c(2, 2);
+    Complex c2(2, 2);
+    print(c * c2);
+
+    Matrice<int> m(5, 5, 10);
     print(m);
-    Matrice<Complex> m2(4, 4, Complex(2, 2));
-    // atribuirea unui element
-    Complex c(2, -6);
-    m[0][0] = c;
-    // Adunare
-    m = m - m2;
-    print("Matricea m - m2:");
-    print(m);
-    print(
-        "Matricea m * m2 care nu cred ca merge bine din motive matematice :))");
-    m = m * m2;
-    print(m);
+    Matrice<int> m2(2, 2, 2);
+    print(m * m2);
+
+    // // Declararea unei matrice
+    // //@params: lini, cloane, initializare
+    // Matrice<Complex> m(3, 3, Complex(2, 0));
+    // // Printare
+    // print("Matrice M:");
+    // print(m);
+    // Matrice<Complex> m2(3, 3, Complex(2, 0));
+    // // atribuirea unui element
+    // // Complex c(2, -6);
+    // // m[0][0] = c;
+    // // Adunare
+    // // m = m - m2;
+    // // print("Matricea m - m2:");
+    // print(m2);
+    // print(
+    //     "Matricea m * m2 care nu cred ca merge bine din motive matematice
+    //     :))");
+    // // m = m * m2;
+    // m = m * m2;
+    // print(m);
 
     // Matrice<char> m2(
-    //     10, 300, {make_pair('a', 15), make_pair('b', 25), make_pair('X',
-    //     50)}, '0');
+    //     10, 300, {make_pair('a', 15), make_pair('b', 25),
+    //     make_pair('X', 50)}, '0');
     // print(m2);
 
     // for (auto a : {'a', 'b', 'X', '0'})
-    //     print(m2.getNoInstanceOf(a));  // de cate ori apare fiecare
-    //     element
+    //     print(m2.getNoInstanceOf(a));  // de cate ori apare
+    //     fiecare element
 
     print("\n\n");
     return 0;
