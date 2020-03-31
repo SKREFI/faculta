@@ -45,7 +45,7 @@ group by d.department_name, j.job_title;
 -- 17
 -- Cel mai mic salariu din departamentul cu cel mai mare salariu mediu
 -- abc :)
-select d.department_name, min(e.salary) 
+select d.department_name,  min(e.salary) 
 from EMPLOYEES e, departments d
 where e.department_id = d.department_id 
 and e.DEPARTMENT_ID = (select e.DEPARTMENT_ID
@@ -102,13 +102,12 @@ having count(*) > 15;
 
 SELECT employee_id, last_name, TO_CHAR(hire_date, ‘dd’)
 FROM employees
-WHERE TO_CHAR(hire_date,'dd') IN
-(SELECT TO_CHAR(hire_date,'dd')
-FROM employees
-GROUP BY TO_CHAR(hire_date,'dd')
-HAVING COUNT(*)=(SELECT MAX(COUNT(*))
-FROM employees
-GROUP BY TO_CHAR(hire_date,'dd')));
+WHERE TO_CHAR(hire_date,'dd') IN (SELECT TO_CHAR(hire_date,'dd')
+                                    FROM employees
+                                    GROUP BY TO_CHAR(hire_date,'dd')
+                                    HAVING COUNT(*)=(SELECT MAX(COUNT(*))
+                                                      FROM employees
+                                                      GROUP BY TO_CHAR(hire_date,'dd')));
 
 -- 21
 
@@ -122,7 +121,7 @@ having count(*) > 10 and DEPARTMENT_ID != 30;
 select e.DEPARTMENT_ID, d.DEPARTMENT_NAME, count(*) angajati, round(avg(salary)) salary
 from EMPLOYEES e
 left join departments d
-on d.department_id = e.department_id
+on d.department_id(+) = e.department_id
 group by e.department_id, d.DEPARTMENT_NAME;
 
 -- 23
