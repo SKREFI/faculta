@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/skrefi/p/things/facultate/poo/T2E17/Agenda.h
+any
+-
+Tools.h
+/home/skrefi/p/things/facultate/poo/T2E17/Tools.h
+
+/home/skrefi/p/things/facultate/poo/T2E17/Tools.h
+bits/stdc++.h
+-
+
+/home/skrefi/p/things/facultate/poo/T2E17/main.cpp
+Tools.h
+/home/skrefi/p/things/facultate/poo/T2E17/Tools.h
+Agenda.h
+/home/skrefi/p/things/facultate/poo/T2E17/Agenda.h
+

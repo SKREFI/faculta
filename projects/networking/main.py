@@ -1,29 +1,40 @@
-import requests
-import json
 
-from models import Articles, Source, Response
+db = ['vreme in ...', 'weather in bucharest',
+      'weather in botosani', 'weather in craiova', 'weather in bacau', 'wbnumaintreba ce e asta']
 
-# base_url = 'http://newsapi.org/v2/everything'
 
-# args = {
-#     'q': 'bitcoin',
-#     'from': '2020-02-29',
-#     'sortBy': 'publishedAt',
-#     'apiKey': 'c45df283c7fd4b078d32086c854fc58d'
-# }
+def bucket(inp, nth=0):
+    d = {}
+    for i in inp:
+        try:
+            key = i[nth]
+            if key in d.keys():
+                d[key].append(i[1:])
+            else:
+                d[key] = [i[1:]]
+        except:
+            return d
+    return d
 
-# r = requests.get(base_url, params=args)
 
-# print((r.encoding))
+def funct(d):
+    for k in d.keys():
+        d[k] = bucket(d[k])
+        funct(d[k])
 
-# j = json.loads(r.text)
 
-with open('data.json', 'rb') as f:
-    j = json.load(f)
+if __name__ == "__main__":
+    db = bucket(db)
+    funct(db)
 
-r = Response(**j)
+    inp = 'weat'
+    inp = [x for x in inp]
 
-# for a in (r.articles):
-# print((a))
+    for i in inp:
+        try:
+            db = db[i]
+        except:
+            asd = 0
 
-print(r.articles[0].title)
+    # print(db.keys())
+    print(db['h'])

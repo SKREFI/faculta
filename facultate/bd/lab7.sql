@@ -22,6 +22,3 @@ select FIRST_NAME || ' ' || LAST_NAME name, HIRE_DATE
 from EMPLOYEES
 where DEPARTMENT_ID in (select DEPARTMENT_ID from EMPLOYEES group by DEPARTMENT_ID having count(*) > 8)
 and HIRE_DATE > (select max(hire_date) from EMPLOYEES where DEPARTMENT_ID = 30);
-
--- 4, 6, 8 HW
--- aliasuri, nr coloane
