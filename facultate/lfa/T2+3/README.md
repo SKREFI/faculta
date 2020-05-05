@@ -11,7 +11,9 @@
 ```
 Exception will be raised if:
 *Start node*, *Final Node* ∉ *All States*
+
 *FROM_NODE* *TO_NODE* ∉ *All States*
+
 *EDGE* ∉ *Aplhabet*
 
 
