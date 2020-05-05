@@ -1,3 +1,12 @@
+"""
+Resurse:
+https://en.wikipedia.org/wiki/Pairing_heap
+https://www.geeksforgeeks.org/pairing-heap/
+MIT OpenCourseWare - Heaps and Heap Sort
+
+Implementare destul de minimalista, sincer m-am chinuit ceva cu el
+Am scris putin cod de demonstrare, adica top (smallest element), delete si insert
+"""
 class Node():
     def __init__(self, value):
         self.value = value
