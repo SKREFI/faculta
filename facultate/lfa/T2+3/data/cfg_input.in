@@ -1,0 +1,17 @@
+S A
+a b
+S
+S > a<S>bb | <E>
+
+# Formatting rules:
+
+# Line
+# 1: Non terminal chars
+# 2: terminal chars
+# 3: start char (non terminal ofc)
+# 4+:   For each non terminal symbol we have S > result1 | result2 | ... | resultN
+#       Spaces must be respected before and after bigger symbol
+#                                before and after pipe symbol
+#       Non terminal symbols stay between <> because I want to be
+#       Abbple to have uppercase terminal chars.
+#

@@ -18,8 +18,9 @@ protected:
 
     Persoana(int id, string name);
 
-    Persoana();
+    friend ostream& operator<<(ostream &os, const Persoana &p);
 
+    Persoana();
 public:
     string getName() {
         return name;

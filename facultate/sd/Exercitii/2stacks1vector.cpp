@@ -17,12 +17,11 @@ void my_exit();
 
 int main() {
     // ==============
-    vector<int> v;
-    v.push_back(1);
-    v.push_back(2);
-    v.push_back(3);
-    v[1] = NULL;
-    print(v);
+    int a = 10;
+    string b = "ananas";
+    if (false && a == b) {
+        print("asdasdas");
+    }
     // ==============
     my_exit();
 }
