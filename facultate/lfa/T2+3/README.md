@@ -18,7 +18,7 @@ Exception will be raised if:
 
 
 # Context-free grammar (CFG)
-[CFG](https://en.wikipedia.org/wiki/Context-free_grammar)
+[CFG - Wikipedia](https://en.wikipedia.org/wiki/Context-free_grammar)
 
 CFG Input Format:
 ```
