@@ -11,12 +11,14 @@
 ```
 Exception will be raised if:
 *Start node*, *Final Node* ∉ *All States*
+
 *FROM_NODE* *TO_NODE* ∉ *All States*
+
 *EDGE* ∉ *Aplhabet*
 
 
 # Context-free grammar (CFG)
-[CFG](https://en.wikipedia.org/wiki/Context-free_grammar)
+[CFG - Wikipedia](https://en.wikipedia.org/wiki/Context-free_grammar)
 
 CFG Input Format:
 ```
@@ -26,7 +28,7 @@ CFG Input Format:
 4+ nts > result1 | result2 | ... | resultN
 ```
 **Note:** 
-1. NTS must be surrounded by **<>**
+1. NTS must be surrounded by **<>** when part of the result
 2. Spaces arround **>** (bigger symbol) and **|** (pipe symbol) must be respected.
 3. 3 In the result set there must be 
 
