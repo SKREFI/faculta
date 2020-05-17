@@ -41,76 +41,17 @@ Abonat_Skype_Extern::Abonat_Skype_Extern(int id, string name, string nrTelefon, 
 Abonat_Skype_Extern::Abonat_Skype_Extern() : Abonat_Skype() {}
 
 Agenda::Agenda() {
-    for (auto n : names) {
-        if (n.first % 2 == 0) {
-            vector<string> v = split(n.second, " ");
-            string m = v[0] + "." + v[1] + "@yahoo.com";
-            any i = Abonat_Skype_Romania(n.first, n.second, to_string(getRandom(1000000000, 9999999999)), 100 + n.first, m);
-            abonati.push_back(i);
-        }
-        else {
-            string country = countries[getRandom(0, countries.size())];
-            any i = Abonat_Skype_Extern(n.first, n.second, to_string(getRandom(1000000000, 9999999999)), 100 + n.first, country);
-            abonati.push_back(i);
-        }
-    }
+    Abonat a = Abonat(1, "Abonat 1", "07738383");
+
 }
 
 ostream &operator<<(ostream &os, const Agenda &obj) {
     for (auto e : obj.abonati) {
-        try {
-            os << (any_cast<Abonat_Skype_Romania>(e)) << endl;
-        }
-        catch (exception exc) {
-            os << (any_cast<Abonat_Skype_Extern>(e)) << endl;
-        }
+        cout<<e;
     }
     return os;
 }
 
-vector<any> Agenda::operator[](int id) {
-    vector<any> v;
-    for (auto e : abonati) {
-        try {
-            if (any_cast<Abonat_Skype_Romania>(e).getId() == id)
-                v.push_back(e);
-        }
-        catch (exception exc) {
-            if (any_cast<Abonat_Skype_Extern>(e).getId() == id)
-                v.push_back(e);
-        }
-    }
-    return v;
-}
-
-vector<any> Agenda::operator[](string name) {
-    vector<any> v;
-    for (auto e : abonati) {
-        try {
-            // desparte numele in 2
-            vector<string> n = split(any_cast<Abonat_Skype_Romania>(e).getName(), " ");
-            for (auto m_name : n)
-                if (m_name == name)
-                    v.push_back(e);
-        }
-        catch (exception exc) {
-            // desparte numele in 2
-            vector<string> n = split(any_cast<Abonat_Skype_Extern>(e).getName(), " ");
-            for (auto m_name : n)
-                if (m_name == name)
-                    v.push_back(e);
-        }
-    }
-    return v;
-}
-
-void Agenda::print(vector<any> v) {
-    for (auto e : v){
-        try {
-            Tools::print(any_cast<Abonat_Skype_Romania>(e));
-        }
-        catch (exception exc) {
-            Tools::print(any_cast<Abonat_Skype_Extern>(e));
-        }
-    }
+Abonat Agenda::operator[](int i) {
+    return this->abonati[i];
 }

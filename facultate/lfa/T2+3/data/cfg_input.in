@@ -1,7 +1,10 @@
-S A
-a b
+S B D C
+a b d x z c w
 S
-S > a<S>bb | <E>
+S > a<S> | b<B>
+B > c | d<D> | x<C>
+C > a<S> | x<C> | z | c<B>
+D > w
 
 # Formatting rules:
 

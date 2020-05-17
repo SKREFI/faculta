@@ -81,7 +81,6 @@ class CFG():
                     i += 1
                 end = i
                 symbol = string[start:end+1]
-                # return first nts, TODO: Decide how to design this function
                 return (symbol)
             i += 1
 
@@ -111,7 +110,7 @@ if __name__ == "__main__":
     cfg = CFG.buildFromFile('data/cfg_input.in')
     print(cfg.getAllWords(6))
 
-
+    
 '''
 Exemplu PDF Tema:
 S A

@@ -5,10 +5,71 @@ if __name__ == "__main__":
     Log.enable = False
     Log.enable_print = False
 
-    automat = Automaton.buildFromFile('data/automat_input.in')
-    print(automat.getRegex())
+    # automat = Automaton.buildFromFile('data/automat_input.in')
+    # print(automat.getRegex())
+
+    cfg = CFG.buildFromFile('data/cfg_input.in')
+    print(cfg.getAllWords(4))
 
 
+'''
+a)
+S A B
+a b x y
+S
+A > xx<A>y | xxy
+B > a<B>b | ab
+'''
+'''
+b)
+S B
+a c b
+S
+S > aa<B>b | aa<S>b
+B > b<B>ccc | bccc
+'''
+'''
+c)
+S B D C
+a b d x z c w
+S
+S > a<S> | b<B>
+B > c | d<D> | x<C>
+C > a<S> | x<C> | z | c<B>
+D > w
+'''
+
+
+'''
+Input A)
+0 1 2 3 4
+a b c
+0
+2 4
+0 a 1
+1 b 1
+1 c 2
+0 b 3
+3 a 4
+
+
+Input B)
+0 1 2 3 4 5 6
+a b c
+0
+6
+0 a 1
+1 b 2
+2 a 2
+2 b 6
+1 c 3
+3 a 4
+4 b 5
+5 c 3
+4 d 6
+
+
+'''
 '''
 Problema 5 pe steroizi
 A B C

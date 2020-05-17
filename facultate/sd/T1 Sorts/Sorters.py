@@ -6,22 +6,40 @@ import time
 
 class Log():
     end = '\033[0m'
+    enable = True
+    enable_print = True
+
+    def __init__(self, enable: bool = True):
+        self.enable = enable
+
+    @classmethod
+    def print(cls, inp, sep: str = ' ', end: str = '\n'):
+        if cls.enable_print:
+            print(inp, sep=sep, end=end)
 
     @classmethod
     def warning(cls, inp):
-        print('\033[93m' + inp + cls.end)
+        if not cls.enable:
+            return
+        print('\033[93m' + str(inp) + cls.end)
 
     @classmethod
     def fail(cls, inp):
-        print('\033[91m' + inp + cls.end)
+        if not cls.enable:
+            return
+        print('\033[91m' + str(inp) + cls.end)
 
     @classmethod
     def succes(cls, inp):
-        print('\033[92m' + inp + cls.end)
+        if not cls.enable:
+            return
+        print('\033[92m' + str(inp) + cls.end)
 
     @classmethod
     def debug(cls, inp):
-        print('\033[94m' + inp + cls.end)
+        if not cls.enable:
+            return
+        print('\033[94m' + str(inp) + cls.end)
 
     @classmethod
     def getAllStyles(cls):
@@ -64,6 +82,8 @@ def quick(inp, low=0, high=-1):
 
 
 def bubble(inp):
+    if len(inp) > 10**5:
+        return False
     n = len(inp)
     for i in range(n):
         for j in range(n - i - 1):
@@ -72,7 +92,7 @@ def bubble(inp):
     return inp
 
 
-def radix(inp, BASE=1000):
+def radix(inp, BASE=10**4):
     if len(inp) == 0:
         return []
     digits = (int(log(max(inp), BASE)) + 1)
@@ -90,7 +110,7 @@ def radix(inp, BASE=1000):
                 l.append(value)
         return l
 
-    key = 1  # adica cifra unitatilor (abcd // key = d)
+    key = 1
     for _ in range(digits):
         d = setup()
         for i in inp:
@@ -101,7 +121,11 @@ def radix(inp, BASE=1000):
 
 
 def count(inp):
+    if max(inp) > 10**5:
+        return False
+    
     l = [0 for _ in range(max(inp) + 1)]
+    print(len(l))
     for i in inp:
         l[i] += 1
     ret = []
@@ -150,13 +174,18 @@ def merge(inp):
 
 
 def test(**args):
-    function = args.get('function', systemSort)
-    name = args.get('name', 'System')
+    function = args.get('function')
+    name = args.get('name')
     debugger = args.get('debugger', False)
-    no_tests = args.get('no_tests', 10)
-    lists_length = args.get('lists_length', 1000)
-    min_num = args.get('min_num', 0)
-    max_num = args.get('max_num', 10**3)
+    no_tests = args.get('no_tests')
+    lists_length = args.get('lists_length')
+    min_num = args.get('min_num')
+    max_num = args.get('max_num')
+    Log.fail(function)
+    no_tests = 1
+    lists_length = 10**5
+    min_num = 0
+    max_num = 10**10
 
     def getms():
         return int(round(time.time() * 1000))
@@ -186,13 +215,16 @@ def test(**args):
 
 def bogo(inp):
     if len(inp) > 9:
-        Log.fail('LIST TO BIG FOR BOGO! This is not supposed to be used lmao')
+        Log.fail('LIST TO BIG FOR BOGO! This is not supposed to be used :)')
     while not inp == sorted(inp):
         random.shuffle(inp)
     return inp
 
 
 def gnomepp(inp):
+    if len(inp) > 10**4 or max(inp) > 10**4:
+        return False
+
     def _gnome(inp, limit):
         pos = limit
         while pos > 0 and inp[pos - 1] > inp[pos]:
@@ -216,5 +248,5 @@ def gnome(inp):
 
 if __name__ == '__main__':
     l = [9, 7, 6, 5, 4, 3]
-    print(bubble(l))
+    print(count(l))
     print(l)

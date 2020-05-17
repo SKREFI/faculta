@@ -6,8 +6,7 @@ using Tools::print;
 int main() {
     Agenda a;
     vector<any> results = a["Cooper"];
-    results = extend(results, a[1]);
-
+    results = extend(results, a[-1]);
     a.print(results);
 
     my_exit();
