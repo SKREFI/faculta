@@ -57,6 +57,9 @@ public:
     int getSkypeId() {
         return id_skype;
     }
+
+    virtual string getMail() {};
+    virtual string getCountry() {};
 };
 
 class Abonat_Skype_Romania : public Abonat_Skype {

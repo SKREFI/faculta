@@ -3,26 +3,16 @@
 
 using Tools::print;
 
-class Contact : public Abonat_Skype_Extern, public Abonat_Skype_Romania {
-
-};
-
 int main() {
 //    Agenda a;
 
     Abonat_Skype_Romania abonat(1, "Nume", "066060", 31, "mail");
 
-    vector<Contact*> c;
+    vector<Abonat_Skype*> c;
 
     c.push_back(new Abonat_Skype_Romania(1, "name", "055", 12, "mail@"));
 
-
-
-
-
-
-
-    my_exit();
+    print(c[0]->getMail());
 }
 
 //    Persoana p(1, "Nicu");
