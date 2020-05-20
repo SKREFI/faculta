@@ -22,7 +22,7 @@ protected:
 
     Persoana();
 public:
-    string getName() {
+    virtual string getName() {
         return name;
     }
 
@@ -45,7 +45,7 @@ public:
     }
 };
 
-class Abonat_Skype : protected Abonat {
+class Abonat_Skype : public Abonat {
 protected:
     int id_skype;
 
@@ -59,7 +59,7 @@ public:
     }
 };
 
-class Abonat_Skype_Romania : protected Abonat_Skype {
+class Abonat_Skype_Romania : public Abonat_Skype {
 private:
     string mail;
 public:
@@ -105,18 +105,3 @@ public:
     }
 };
 
-class Agenda : public Abonat_Skype_Extern, public Abonat_Skype_Romania {
-private:
-    vector<Abonat> abonati;
-public:
-    Agenda();
-    friend ostream &operator<<(ostream &os, const Agenda &obj);
-    Abonat operator[](int);
-};
-
-
-vector<string> countries = {"China", "India", "United", "Indonesia", "Brazil", "Pakistan", "Nigeria", "Bangladesh",
-                            "Russia", "Japan", "Mexico", "Philippines", "Ethiopia", "Vietnam", "Egypt", "Iran",
-                            "Congo,", "Germany", "Turkey", "Thailand", "France", "United", "Italy", "Burma",
-                            "South", "Tanzania", "Korea,", "Spain", "Colombia", "Kenya", "Ukraine", "Argentina",
-                            "Algeria", "Poland", "Ugama rognda", "Iraq", "Canada", "Morocco", "Afghanistan"};

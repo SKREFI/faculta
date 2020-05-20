@@ -1,7 +1,3 @@
-//
-// Created by skrefi on 04.04.2020.
-//
-
 #ifndef T2E17_TOOLS_H
 #define T2E17_TOOLS_H
 
@@ -62,6 +58,5 @@ ostream &operator<<(ostream &out, const pair<T, S> &v) {
 }
 
 void my_exit();
-
 
 #endif //T2E17_TOOLS_H

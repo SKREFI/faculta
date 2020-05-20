@@ -4,7 +4,6 @@
 
 #include "Agenda.h"
 
-
 Persoana::Persoana(int id, string name) {
     this->id = id;
     this->name = name;
@@ -39,19 +38,3 @@ Abonat_Skype_Extern::Abonat_Skype_Extern(int id, string name, string nrTelefon, 
 }
 
 Abonat_Skype_Extern::Abonat_Skype_Extern() : Abonat_Skype() {}
-
-Agenda::Agenda() {
-    Abonat a = Abonat(1, "Abonat 1", "07738383");
-
-}
-
-ostream &operator<<(ostream &os, const Agenda &obj) {
-    for (auto e : obj.abonati) {
-        cout<<e;
-    }
-    return os;
-}
-
-Abonat Agenda::operator[](int i) {
-    return this->abonati[i];
-}

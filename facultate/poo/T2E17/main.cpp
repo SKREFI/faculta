@@ -3,11 +3,24 @@
 
 using Tools::print;
 
+class Contact : public Abonat_Skype_Extern, public Abonat_Skype_Romania {
+
+};
+
 int main() {
-    Agenda a;
-    vector<any> results = a["Cooper"];
-    results = extend(results, a[-1]);
-    a.print(results);
+//    Agenda a;
+
+    Abonat_Skype_Romania abonat(1, "Nume", "066060", 31, "mail");
+
+    vector<Contact*> c;
+
+    c.push_back(new Abonat_Skype_Romania(1, "name", "055", 12, "mail@"));
+
+
+
+
+
+
 
     my_exit();
 }
