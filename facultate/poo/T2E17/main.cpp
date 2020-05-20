@@ -3,16 +3,45 @@
 
 using Tools::print;
 
+vector<string> tari = {"USA", "UK", "Spain", "France", "Germany", "China"};
+vector<string> names = {"Liam", "Emma", "Olivia", "Isabella", "James", "William", "Ava", "Noah"};
+
+Abonat_Skype_Romania *getRandomASR() {
+    return new Abonat_Skype_Romania(getRandom(0, 10001), "name" + to_string(getRandom(1, 100)),
+                                    to_string(getRandom(1000000000, 9000000000)), getRandom(10, 1000),
+                                    names[getRandom(0, names.size())] + "@gmail.com");
+}
+
+Abonat_Skype_Extern *getRandomASE() {
+    return new Abonat_Skype_Extern(getRandom(0, 10001), "name" + to_string(getRandom(1, 100)),
+                                   to_string(getRandom(1000000000, 9000000000)), getRandom(10, 1000),
+                                   tari[getRandom(0, tari.size())]);
+}
+
+
 int main() {
-//    Agenda a;
+    srand(time(NULL));
 
-    Abonat_Skype_Romania abonat(1, "Nume", "066060", 31, "mail");
+    Agenda a;
+    a.addContact(getRandomASE());
+    a.addContact(getRandomASE());
+    a.addContact(getRandomASR());
 
-    vector<Abonat_Skype*> c;
+//
+//    print(a.getContact(2)->getCountry());
+//    print(a.getContact(2)->getCountry());
+//    print(a.getContact(1)->getMail());
+//    print(a.getContact(0)->getMail());
 
-    c.push_back(new Abonat_Skype_Romania(1, "name", "055", 12, "mail@"));
-
-    print(c[0]->getMail());
+    for (int i = 0; i < a.size(); i++) {
+        try {
+            print(a.getContact(i)->getCountry(), "", " ");
+            print(a.getContact(i)->getMail());
+        }
+        catch (logic_error l) {
+            print("123");
+        }
+    }
 }
 
 //    Persoana p(1, "Nicu");

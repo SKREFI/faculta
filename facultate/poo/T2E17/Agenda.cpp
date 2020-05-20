@@ -38,3 +38,17 @@ Abonat_Skype_Extern::Abonat_Skype_Extern(int id, string name, string nrTelefon, 
 }
 
 Abonat_Skype_Extern::Abonat_Skype_Extern() : Abonat_Skype() {}
+
+
+Abonat_Skype* Agenda::getContact(int index) {
+    try {
+        if (index < 0 || index >= this->contacts.size())
+            throw string("Index of out range!");
+
+        else
+            return this->contacts[index];
+    }
+    catch (string& s) {
+        cout<<s<<'\n';
+    }
+}

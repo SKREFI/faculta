@@ -5,7 +5,6 @@
 #include "Tools.h"
 #include <bits/stdc++.h>
 
-
 int getRandom(int min, int max) { return rand() % max + min; }
 
 vector<string> split(string s, string delimiter) {

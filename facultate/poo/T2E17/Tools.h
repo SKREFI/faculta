@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 int getRandom(int min, int max);
 
 vector<string> split(string s, string delimiter = " ");
@@ -37,7 +38,7 @@ ostream &operator<<(ostream &os, const vector<T> &v) {
 }
 
 template<class T>
-vector<T> extend(vector<T> v, vector<T> w){
+vector<T> extend(vector<T> v, vector<T> w) {
     v.reserve(v.size() + distance(w.begin(), w.end()));
     v.insert(v.end(), w.begin(), w.end());
     return v;

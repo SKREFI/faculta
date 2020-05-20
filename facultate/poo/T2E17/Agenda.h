@@ -18,9 +18,10 @@ protected:
 
     Persoana(int id, string name);
 
-    friend ostream& operator<<(ostream &os, const Persoana &p);
+    friend ostream &operator<<(ostream &os, const Persoana &p);
 
     Persoana();
+
 public:
     virtual string getName() {
         return name;
@@ -70,9 +71,11 @@ public:
 
     Abonat_Skype_Romania();
 
-    string getMail() {
+    string getMail() override {
         return mail;
     }
+
+    string getCountry() {return NULL;};
 
     friend ostream &operator<<(ostream &os, const Abonat_Skype_Romania &obj) {
         os << obj.id << ' ' << obj.name << ' ' << obj.nr_telefon << ' ' << obj.id_skype << ' ' << obj.mail;
@@ -93,9 +96,11 @@ public:
 
     Abonat_Skype_Extern();
 
-    string getCountry() {
+    string getCountry() override {
         return tara;
     }
+
+    string getMail() {return NULL;};
 
     friend ostream &operator<<(ostream &os, const Abonat_Skype_Extern &obj) {
         os << obj.id << ' ' << obj.name << ' ' << obj.nr_telefon << ' ' << obj.id_skype << ' ' << obj.tara;
@@ -108,3 +113,26 @@ public:
     }
 };
 
+
+class Agenda {
+private:
+    vector<Abonat_Skype *> contacts;
+public:
+    void addContact(Abonat_Skype_Romania *a) { this->contacts.push_back(a); }
+
+    void addContact(Abonat_Skype_Extern *a) { this->contacts.push_back(a); }
+
+    Abonat_Skype *getContact(int index);
+
+    void removeContact(int index) {
+
+    }
+
+    void removeContactById(int id) {
+
+    }
+
+    int size(){
+        return contacts.size();
+    }
+};
