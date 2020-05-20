@@ -27,21 +27,15 @@ int main() {
     a.addContact(getRandomASE());
     a.addContact(getRandomASR());
 
-//
-//    print(a.getContact(2)->getCountry());
-//    print(a.getContact(2)->getCountry());
-//    print(a.getContact(1)->getMail());
-//    print(a.getContact(0)->getMail());
+    for (auto e : a.getContacts()) cout<<*e<<'\n';
 
-    for (int i = 0; i < a.size(); i++) {
-        try {
-            print(a.getContact(i)->getCountry(), "", " ");
-            print(a.getContact(i)->getMail());
-        }
-        catch (logic_error l) {
-            print("123");
-        }
-    }
+    a.removeContact(0);
+    print("After removel:");
+
+    for (auto e : a.getContacts()) cout<<*e<<'\n';
+
+
+    my_exit();
 }
 
 //    Persoana p(1, "Nicu");

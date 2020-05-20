@@ -1,10 +1,7 @@
-S B D C
-a b d x z c w
 S
-S > a<S> | b<B>
-B > c | d<D> | x<C>
-C > a<S> | x<C> | z | c<B>
-D > w
+a b c
+S
+S > a | b | c | <S><S> | <E>
 
 # Formatting rules:
 
@@ -16,5 +13,5 @@ D > w
 #       Spaces must be respected before and after bigger symbol
 #                                before and after pipe symbol
 #       Non terminal symbols stay between <> because I want to be
-#       Abbple to have uppercase terminal chars.
+#       Able to have uppercase terminal chars.
 #
