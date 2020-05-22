@@ -1,5 +1,7 @@
-from math import log
+# https://www.infoarena.ro/problema/radixsort
+# 0p
 
+from math import log
 
 def radix(inp, BASE=1000):
     if len(inp) == 0:
@@ -41,9 +43,16 @@ if __name__ == "__main__":
     for i in range(1, n):
         arr[i] = (a * arr[i-1] + b) % c
 
-    # arr = radix(arr, int(log(c, 2)))
-    arr.sort()
+    arr = radix(arr, int(log(c, 2)))
 
     with open('radixsort.out', 'w') as f:
-        for x in arr[0::10]:
-            f.write(str(x) + ' ')
+        i = 0
+        ret = ''
+        while True:
+            try:
+                ret += str(arr[i]) + ' '
+                i += 10
+            except:
+                ret = ret[:-1]
+                f.write(ret)
+                break

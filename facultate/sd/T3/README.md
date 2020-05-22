@@ -1,40 +1,86 @@
+
+
+
 # Heapuri Arbori Binari de cautare:
 
+  
+
 ##### All BST Preorders - 7⦿ | 100% [CSA](https://csacademy.com/contest/interview-archive/task/all-bst-preorders/)
-##### Proc2 - 6⦿ | 100p [Infoarena](https://www.infoarena.ro/problema/proc2) 
+
+##### Proc2 - 6⦿ | 100p [Infoarena](https://www.infoarena.ro/problema/proc2)
+
 ##### Heapuri - 1⦿ | 100p [Infoarena](https://www.infoarena.ro/problema/heapuri)
+
+>Total: 14/15 ⦿
+
+  
 
 # Sortari, Cautare, SDO
 
-###### One Letter - 3⦿ | 100% [CSA](https://csacademy.com/contest/archive/task/one_letter)
-##### Cautare Bianra 3⦿ | 40p nu inteleg cum... cu bound  din STL [Infoarena](https://www.infoarena.ro/problema/cautbin)
-##### Sum of Odd Integers 4⦿ | 100% [CF](https://codeforces.com/problemset/problem/1327/A)
-##### Radix Sort 3⦿ |   p [Infoarena](https://www.infoarena.ro/problema/radixsort)
+  
 
+###### [One Letter](https://csacademy.com/contest/archive/task/one_letter) - 3⦿ | 100% 
+
+##### [Cautare Bianra](https://www.infoarena.ro/problema/cautbin) 3⦿ | 40p nu inteleg cum... cu bound din STL 
+
+##### [Sum of Odd Integers](https://codeforces.com/problemset/problem/1327/A) 4⦿ | 100%
+
+##### [Radix Sort](https://www.infoarena.ro/problema/radixsort) 3⦿ | 30p
+
+##### [Statistici de ordine](https://www.infoarena.ro/problema/sdo) 3⦿ | 100p
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+  >Total: 16/25 ⦿
+  
+  
 
 # Liste Stive Cozi Deque Hashuri
 
-#####
-#####
-#####
-#####
-#####
-#####
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+  >Total: 0/25 ⦿
 
 # Arbint Aib Rmq
 
-#####
-#####
-#####
-#####
-#####
-#####
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+  >Total: 0/25 ⦿
 
 # Diverse
 
-#####
-#####
-#####
-#####
-#####
-#####
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+##### []() X⦿ | Xp
+
+>Total: 0/25 ⦿
