@@ -19,7 +19,7 @@
 
   
 
-###### [One Letter](https://csacademy.com/contest/archive/task/one_letter) - 3⦿ | 100% 
+###### [One Letter](https://csacademy.com/contest/archive/task/one_letter) 3⦿ | 100% 
 
 ##### [Cautare Bianra](https://www.infoarena.ro/problema/cautbin) 3⦿ | 40p nu inteleg cum... cu bound din STL 
 
