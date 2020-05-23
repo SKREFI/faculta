@@ -45,9 +45,11 @@
 
 ##### [Hotelier](https://codeforces.com/problemset/problem/1200/A) 3⦿
 
-##### []() X⦿ | Xp
+##### [Alibaba](https://www.infoarena.ro/problema/alibaba) 3⦿ | 100p
 
-  >Total: 19/25 ⦿
+##### [Deq](https://www.infoarena.ro/problema/deque) 3⦿ | 20p O(n*k) ??? how
+
+  >Total: 25/25 ⦿
 
 # Arbint Aib Rmq
 

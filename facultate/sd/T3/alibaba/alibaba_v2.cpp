@@ -34,42 +34,33 @@ void print(T ret = "\n", string sep = "", string end = "\n");
 template <typename T, typename S>
 ostream &operator<<(ostream &out, const pair<T, S> &v);
 
-vi stringToVi(string x) {
-    vi v;
-    for (unsigned int i = 0; i < x.size(); ++i) {
-        v.push_back((int)(x[i] - '0'));
-    }
-    return v;
-}
-
 ofstream fout("alibaba.out", ios::out);
-string solution(vi v, int n, int k, string result = "") {
-    if (k == 1) {
-        for (auto e : v)
-            result += to_string(e);
-        return result;
-    }
-
-    int max_value = *max_element(v.begin(), v.begin() + k + 1);
-
-    int i = 0;
-    while (true) {
-        if (max_value == v[i])
-            break;
-        i++;
-    }
-    return solution(vector<int>(v.begin() + i + 1, v.end()), n - i - 1, k - 1, result + to_string(v[i]));
-}
+ifstream fin("alibaba.in", ios::in);
 
 int main() {
-    ifstream fin("alibaba.in", ios::in);
-    int n, k;
+    stack<char> s;
+    int n, k, i = 0;
     fin >> n >> k;
-    string x;
-    fin >> x;
-    vi v = stringToVi(x);
-    string s = solution(v, n, k);
-    fout << s;
+    while (i < n) {
+        char d;
+        fin >> d;
+        while (k > 0 && !s.empty() && s.top() < d) {
+            s.pop();
+            k--;
+        }
+        s.push(d);
+        i++;
+    }
+    while (k--) s.pop();
+
+    string ret = "";
+    while (!s.empty()) {
+        ret += s.top();
+        s.pop();
+    }
+
+    reverse(be(ret));
+    fout << ret;
 
     exit(0);
 }

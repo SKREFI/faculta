@@ -1,2 +1,0 @@
-
-    cout << *max_element
