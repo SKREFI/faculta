@@ -10,18 +10,15 @@ int main() {
     fin >> n;
     set<int> s;
     int t, value;
+
     while (n--) {
         fin >> t;
         fin >> value;
-        switch (t) {
-            case 1:
-                s.insert(value);
-                break;
-            case 2:
-                s.erase(value);
-                break;
-            case 3:
-                fout << to_string(s.find(value) != s.end() ? 1 : 0) << endl;
-        }
+        if (t == 1)
+            s.insert(value);
+        else if (t == 2)
+            s.erase(value);
+        else
+            fout << (s.find(value) != s.end() ? 1 : 0) << endl;
     }
 }

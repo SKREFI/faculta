@@ -39,19 +39,21 @@
 
 ##### [Anagrams](https://csacademy.com/contest/archive/task/anagrams) 4⦿ | 100p
 
-##### []() X⦿ | Xp
+##### [Hashuri](https://www.infoarena.ro/problema/hashuri) 7⦿ | 60p
+
+##### [Sereja and Suffixes](https://codeforces.com/problemset/problem/368/B) 5⦿
+
+##### [Hotelier](https://codeforces.com/problemset/problem/1200/A) 3⦿
 
 ##### []() X⦿ | Xp
 
-##### []() X⦿ | Xp
-
-##### []() X⦿ | Xp
-
-  >Total: 0/25 ⦿
+  >Total: 19/25 ⦿
 
 # Arbint Aib Rmq
 
-##### []() X⦿ | Xp
+##### [MIT](https://www.infoarena.ro/problema/mit) 4⦿ | 40p
+
+##### [RMQ](https://www.infoarena.ro/problema/rmq) 5⦿ | 30p
 
 ##### []() X⦿ | Xp
 
@@ -59,13 +61,15 @@
 
 ##### []() X⦿ | Xp
 
-##### []() X⦿ | Xp
-
-  >Total: 0/25 ⦿
+  >Total: 9/25 ⦿
 
 # Diverse
 
-##### []() X⦿ | Xp
+##### [BOS](https://csacademy.com/contest/archive/task/bounded-offset-sorting) 3⦿ | 100p
+
+##### [4XTremes](https://csacademy.com/contest/interview-archive/task/four-x-tremes/) 1⦿ | 100p
+
+##### [Largest Concat Number](https://csacademy.com/contest/archive/task/largest-concat-number) 3⦿ | 33p
 
 ##### []() X⦿ | Xp
 
@@ -73,8 +77,4 @@
 
 ##### []() X⦿ | Xp
 
-##### []() X⦿ | Xp
-
-##### []() X⦿ | Xp
-
->Total: 0/25 ⦿
+>Total: 7/25 ⦿

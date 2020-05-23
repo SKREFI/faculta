@@ -1,3 +1,5 @@
+// https://www.infoarena.ro/problema/paranteze
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,8 +34,26 @@ void print(T ret = "\n", string sep = "", string end = "\n");
 template <typename T, typename S>
 ostream &operator<<(ostream &out, const pair<T, S> &v);
 
+vi stringToVi(string x) {
+    vi v;
+    for (int i = 0; i < x.size(); ++i) {
+        v.push_back((int)(x[i] - '0'));
+    }
+    return v;
+}
+
 int main() {
-    
+    ifstream fin("alibaba.in", ios::in);
+    ofstream fout("alibaba.out", ios::out);
+    int n, k;
+    fin >> n >> k;
+    string x;
+    fin >> x;
+    vi v = stringToVi(x);
+
+    int j = n - k;
+    print(v);
+    cout << *max_element(v.begin(), v.end() + 3);
 
     exit(0);
 }

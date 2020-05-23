@@ -1,3 +1,5 @@
+// https://codeforces.com/problemset/problem/1200/A
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -32,8 +34,37 @@ void print(T ret = "\n", string sep = "", string end = "\n");
 template <typename T, typename S>
 ostream &operator<<(ostream &out, const pair<T, S> &v);
 
+int charToint(char a) {
+    char *p = &a;
+    int k = atoi(p);
+    return k;
+}
+
 int main() {
-    
+    int n = get<int>();
+    vi v(10);
+    string s = get<string>();
+
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == 'L') {
+            for (int i = 0; i < 10; i++) {
+                if (v[i] == 0) {
+                    v[i] = 1;
+                    break;
+                }
+            }
+        } else if (s[i] == 'R') {
+            for (int i = 9; i >= 0; i--) {
+                if (v[i] == 0) {
+                    v[i] = 1;
+                    break;
+                }
+            }
+        } else
+            v[charToint(s[i])] = 0;
+    }
+
+    for (auto e : v) cout << e;
 
     exit(0);
 }
