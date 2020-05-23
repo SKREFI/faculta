@@ -13,13 +13,11 @@ template <class T>
 void print(T ret = "\n", string sep = "", string end = "\n");
 template <typename T, typename S>
 ostream &operator<<(ostream &out, const pair<T, S> &v);
-void my_exit();
 
 int main() {
-    // ==============
+    print('a');
 
-    // ==============
-    my_exit();
+    exit(0);
 }
 
 int getRandom(int min, int max) { return rand() % max + min; }
@@ -73,9 +71,4 @@ ostream &operator<<(ostream &out, const pair<T, S> &v) {
     out << "(";
     out << v.first << ", " << v.second << ")";
     return out;
-}
-void my_exit() {
-    print("\n\n__-==DONE==-__");
-
-    exit(1);
 }
