@@ -57,13 +57,13 @@
 
 ##### [RMQ](https://www.infoarena.ro/problema/rmq) 5⦿ | 30p
 
-##### []() X⦿ | Xp
+##### [Order](https://www.infoarena.ro/problema/order) 5⦿ | 30p
 
 ##### []() X⦿ | Xp
 
 ##### []() X⦿ | Xp
 
-  >Total: 9/25 ⦿
+  >Total: 14/25 ⦿
 
 # Diverse
 

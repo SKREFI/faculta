@@ -1,11 +1,15 @@
 # # https://csacademy.com/contest/interview-archive/task/all-bst-preorders/
 
+
 def all_bst_preorders(size):
     class Node:
         def __init__(self, item):
             self.key = item
             self.left = None
             self.right = None
+
+        def __repr__(self):
+            return f'NODE[{self.key}, L/R: {self.left}, {self.right}]'
 
     def preorder(root, l):
         if root:
@@ -33,11 +37,13 @@ def all_bst_preorders(size):
                     node.left = left
                     node.right = right
                     l.append(node)
+                    print(node)
         return l
 
     for tree in buildTree(1, size):
         print(*preorder(tree, []), sep=' ', end='\n')
 
 
-size = int(input())
+# size = int(input())
+size = 2
 all_bst_preorders(size)

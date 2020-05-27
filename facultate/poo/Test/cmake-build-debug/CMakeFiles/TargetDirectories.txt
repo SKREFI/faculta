@@ -1,3 +1,0 @@
-/home/skrefi/p/things/facultate/poo/Test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/skrefi/p/things/facultate/poo/Test/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/skrefi/p/things/facultate/poo/Test/cmake-build-debug/CMakeFiles/Test.dir

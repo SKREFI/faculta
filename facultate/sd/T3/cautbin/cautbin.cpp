@@ -1,8 +1,24 @@
-// Cautare binara cu stl upper/lower_bound > 60p  
+// Cautare binara cu stl upper/lower_bound > 60p
 
 #include <bits/stdc++.h>
 using namespace std;
 
+// data types and stl
+typedef long long ll;
+#define ull unsigned ll
+typedef vector<int> vi;
+#define pb push_back
+typedef vector<vi> vvi;
+typedef pair<int, int> ii;
+typedef map<int, int> d;
+typedef map<int, vi> dvi;
+
+// Functions
+#define getVector(v, n) \
+    while (n--) v.pb(get<int>(fin));
+#define isInside binary_search
+#define be(v) v.begin(), v.end()
+// Things
 template <class T>
 T get(ifstream &fin) {
     T ret;

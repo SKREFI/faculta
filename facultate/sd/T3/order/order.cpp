@@ -32,8 +32,31 @@ void print(T ret = "\n", string end = "\n");
 template <typename T, typename S>
 ostream &operator<<(ostream &out, const pair<T, S> &v);
 
+ofstream fout("order.out", ios::out);
 int main() {
-    
+    ifstream fin("order.in", ios::in);
+
+    int n;
+    fin >> n;
+    //        index visitat
+    vector<pair<int, bool>> v;
+    int n_back = n;
+    int i = 0;
+    while (n--) v.push_back(make_pair(i++, 0));
+    n = n_back;
+
+    int pozitie = 0;
+    for (int i = 1; i <= n; i++) {
+        int i2 = i;
+        while (i2) {
+            pozitie++;
+            if (pozitie >= v.size()) pozitie = 0;
+            if (v[pozitie].second != 1)  // daca este deja vizitat continuam adica nu micsoram i2
+                i2--;
+        }
+        v[pozitie].second = 1;  // visitat
+        fout << pozitie + 1 << ' ';
+    }
 
     exit(0);
 }
