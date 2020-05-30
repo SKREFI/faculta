@@ -36,8 +36,39 @@ ofstream fout("problema.out", ios::out);
 ifstream fin("problema.in", ios::in);
 
 int main() {
-    
-
+    vi v;
+    int n, k;
+    cin >> n;
+    cin >> k;
+    getVector(v, n);
+    int kk = k;  // backup pt k
+    int row = 1;
+    int place = -1;
+    int i = 1;
+    vi rows;
+    while (i < v.size()) {
+        if (v[i] == v[i - 1] + 1) {
+            row++;
+            i++;
+        } else {
+            int needed = v[i] - v[i - 1] - 1;  // de cate mai avem nevoie ca sa completam
+            if (needed <= k) {                 // daca avem suficiente
+                row += needed;                 // adaugam la sir numarul necesar
+                k -= needed;                   // si-l elminam din stoc
+                row++;
+                i++;
+            } else {       // nu mai avem suficienta ca sa ajungem la urmatorul domino
+                row += k;  // adaugm to ce mai avem la row si gata
+                // resetam totul si adaugm row la rows
+                rows.pb(row);
+                row = 1;
+                k = kk;
+                i++;
+            }
+        }
+    }
+    rows.pb(k + row);
+    print(*max_element(be(rows)));
     exit(0);
 }
 

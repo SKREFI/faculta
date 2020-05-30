@@ -1,3 +1,6 @@
+// https://csacademy.com/contest/archive/task/dominoes/statement/
+// varianta din editorial 100p bineinteles
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -31,13 +34,18 @@ template <class T>
 void print(T ret = "\n", string end = "\n");
 template <typename T, typename S>
 ostream &operator<<(ostream &out, const pair<T, S> &v);
-
-ofstream fout("problema.out", ios::out);
-ifstream fin("problema.in", ios::in);
-
 int main() {
-    
-
+    vi v;
+    int n, k;
+    cin >> n >> k;
+    getVector(v, n);
+    int l = 0, r = 0, best = k;
+    do {
+        while ((v[r] - v[l]) - (r - l) > k) ++l;
+        best = max(best, r - l + 1 + k);
+        r++;
+    } while (r < v.size());
+    cout << best;
     exit(0);
 }
 

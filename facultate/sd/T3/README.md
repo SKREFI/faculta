@@ -77,10 +77,10 @@
 
 ##### [Closest Pair](https://csacademy.com/contest/interview-contest-1/task/closest-pair/statement/) 3⦿ | 100p done before
 
-##### []() X⦿ | Xp
+##### [Dreptunghi3](https://www.infoarena.ro/problema/dreptunghiuri3) 3⦿ | 10p
 
 ##### []() X⦿ | Xp
 
 ##### [Kefa and Company](https://codeforces.com/problemset/problem/580/B) 3⦿ | Fail la 28... N-am adaugat-o la punctaj
 
->Total: 12/25 ⦿
+>Total: 15/25 ⦿

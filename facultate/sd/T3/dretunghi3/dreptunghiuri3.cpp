@@ -32,11 +32,71 @@ void print(T ret = "\n", string end = "\n");
 template <typename T, typename S>
 ostream &operator<<(ostream &out, const pair<T, S> &v);
 
-ofstream fout("problema.out", ios::out);
-ifstream fin("problema.in", ios::in);
+class Punct {
+   public:
+    int x, y;
+};
+
+class Dreptunghi {
+   public:
+    Punct s, d;  // stanga dreapta
+};
+
+ofstream fout("dreptunghiuri3.out", ios::out);
+ifstream fin("dreptunghiuri3.in", ios::in);
 
 int main() {
-    
+    int n, m, k;
+    fin >> n >> m >> k;
+
+    vector<vector<int>> matrix;
+
+    vector<int> linie;
+    for (int i = 0; i < n; i++)
+        linie.pb(0);
+
+    for (int i = 0; i < m; i++)
+        matrix.pb(linie);
+
+    for (auto line : matrix) {
+        print(line);
+    }
+
+    while (k--) {
+        Dreptunghi d;
+        int v;
+        fin >> d.s.x >> d.s.y >> d.d.x >> d.d.y >> v;
+        d.s.x--;
+        d.s.y--;
+        d.d.x--;
+        d.d.y--;
+        for (int x = d.s.x; x <= d.d.x; x++) {
+            for (int y = d.s.y; y <= d.d.y; y++) {
+                matrix[y][x] += v;
+            }
+        }
+        cout << d.s.x << ' ' << d.s.y << ' ' << d.d.x << ' ' << d.d.y << ' ' << v << endl;
+        print(k);
+        for (auto line : matrix) {
+            print(line);
+        }
+    }
+
+    unordered_map<int, int> map;
+    for (auto line : matrix) {
+        for (auto e : line) {
+            map[e]++;
+        }
+    }
+
+    int max_e = -1;
+    for (auto e : map) {
+        if (e.first > max_e) {
+            max_e = e.first;
+        }
+    }
+
+    fout << max_e << ' ' << map[max_e];
 
     exit(0);
 }
