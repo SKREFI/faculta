@@ -5,11 +5,11 @@
 
   
 
-##### All BST Preorders - 7⦿ | 100% [CSA](https://csacademy.com/contest/interview-archive/task/all-bst-preorders/)
+##### [All BST Preorders](https://csacademy.com/contest/interview-archive/task/all-bst-preorders/) - 7⦿ | 100%
 
-##### Proc2 - 6⦿ | 100p [Infoarena](https://www.infoarena.ro/problema/proc2)
+##### [Proc2](https://www.infoarena.ro/problema/proc2) - 6⦿ | 100p
 
-##### Heapuri - 1⦿ | 100p [Infoarena](https://www.infoarena.ro/problema/heapuri)
+##### [Heapuri](https://www.infoarena.ro/problema/heapuri) - 1⦿ | 100p
 
 >Total: 14/15 ⦿
 
@@ -73,10 +73,14 @@
 
 ##### [Largest Concat Number](https://csacademy.com/contest/archive/task/largest-concat-number) 3⦿ | 33p
 
-##### []() X⦿ | Xp
+##### [Array Intersection](https://csacademy.com/contest/interview-archive/task/array-intersection/statement/) 2⦿ | 100%
+
+##### [Closest Pair](https://csacademy.com/contest/interview-contest-1/task/closest-pair/statement/) 3⦿ | 100p done before
 
 ##### []() X⦿ | Xp
 
 ##### []() X⦿ | Xp
 
->Total: 7/25 ⦿
+##### [Kefa and Company](https://codeforces.com/problemset/problem/580/B) 3⦿ | Fail la 28... N-am adaugat-o la punctaj
+
+>Total: 12/25 ⦿
