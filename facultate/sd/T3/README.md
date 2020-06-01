@@ -79,8 +79,12 @@
 
 ##### [Dreptunghi3](https://www.infoarena.ro/problema/dreptunghiuri3) 3⦿ | 10p
 
+##### [Dominoes](https://csacademy.com/contest/archive/task/dominoes) 3⦿ | 55p solutia mea, am completata cu ajutorul editorialului
+
+##### []() X⦿ | Xp
+
 ##### []() X⦿ | Xp
 
 ##### [Kefa and Company](https://codeforces.com/problemset/problem/580/B) 3⦿ | Fail la 28... N-am adaugat-o la punctaj
 
->Total: 15/25 ⦿
+>Total: 18/25 ⦿
