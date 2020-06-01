@@ -6,7 +6,6 @@ using namespace std;
 #define PI 3.1415926535897932384626
 
 // data types and stl
-typedef long long ll;
 #define ull unsigned ll
 typedef vector<int> vi;
 #define pb push_back
@@ -41,49 +40,46 @@ ifstream fin("pikachu.in", ios::in);
 #define REMAX(a, b) (a) = max((a), (b))  // set a to the maximum of a and b
 #define REMIN(a, b) (a) = min((a), (b))
 
-ui flatten(vi v, ui h, ui k) {
-    ui ret = 0, min = INF;
-    for (int i = 1; i < v.size(); i++) {
+ui flatten(ui v[], ui h, ui k) {
+    ui min = INF, ret = 0;
+    ui n = sizeof(v) / sizeof(v[0]);
+    for (int i = 0; i < n; i++) {
+        // cout << "Itaration: " << i << '\n';
+        // print(i);
+        // print(ret);
         ret += abs<int>(v[i] - h);
-        if (i > k - 1) ret -= abs<int>(v[i - k + 1] - h);
-        REMIN(min, ret);
+        if (i >= k) {
+            ret -= abs<int>(v[i - k] - h);
+            REMIN(min, ret);
+        }
     }
     return min;
 }
 
 int main() {
-    ui max = 0;
-    int min = -1;
-    int n, k;
+    ui max = 0, min = INF;
+    ui n, k;
     fin >> n >> k;
-    vi v;
+    ui v[n];
     ui aux;
     for (int i = 0; i < n; i++) {
         fin >> aux;
         REMAX(max, aux);
         REMIN(min, aux);
-        v.pb(aux);
+        v[i] = aux;
     }
 
-    print(v);
-    print(min);
-    print(max);
-
-    ui s = min, d = max, m, ret;
-
+    ui s = min, d = max, m;
+    ui sol;
     while (s <= d) {
         m = (s + d) / 2;
-        print("Flatten comparation: ");
-        print(flatten(v, m - 1, k) > flatten(v, m + 1, k));
-
+        // cout << "Left: " << s << "  Right: " << d << '\n';
         if (flatten(v, m - 1, k) > flatten(v, m + 1, k))
             s = m + 1;
         else
             d = m - 1;
     }
-
     fout << flatten(v, s, k);
-
     exit(0);
 }
 

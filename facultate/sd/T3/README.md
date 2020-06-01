@@ -59,11 +59,7 @@
 
 ##### [Order](https://www.infoarena.ro/problema/order) 5⦿ | 30p
 
-##### []() X⦿ | Xp
-
-##### []() X⦿ | Xp
-
-  >Total: 14/25 ⦿
+  >Total: 14/15 ⦿
 
 # Diverse
 
@@ -79,12 +75,13 @@
 
 ##### [Dreptunghi3](https://www.infoarena.ro/problema/dreptunghiuri3) 3⦿ | 10p
 
-##### [Dominoes](https://csacademy.com/contest/archive/task/dominoes) 3⦿ | 55p solutia mea, am completata cu ajutorul editorialului
+##### [Dominoes](https://csacademy.com/contest/archive/task/dominoes) 3⦿ | 55p solutia mea, am completat-o cu ajutorul editorialului pana la 100
 
-##### []() X⦿ | Xp
-
-##### []() X⦿ | Xp
+##### [Pikachu](https://www.infoarena.ro/problema/pikachu) 5⦿ | 20p
 
 ##### [Kefa and Company](https://codeforces.com/problemset/problem/580/B) 3⦿ | Fail la 28... N-am adaugat-o la punctaj
 
->Total: 18/25 ⦿
+>Total: 23/25 ⦿
+
+
+##### Total Overall: 101/105⦿
