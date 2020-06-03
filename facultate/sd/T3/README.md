@@ -39,7 +39,7 @@
 
 ##### [Anagrams](https://csacademy.com/contest/archive/task/anagrams) 4⦿ | 100p
 
-##### [Hashuri](https://www.infoarena.ro/problema/hashuri) 7⦿ | 60p
+##### [Hashuri](https://www.infoarena.ro/problema/hashuri) 7⦿ | 70p cu (unordered_)map... ?!?!
 
 ##### [Sereja and Suffixes](https://codeforces.com/problemset/problem/368/B) 5⦿
 
